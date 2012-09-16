@@ -2,12 +2,24 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    flash[:message]  = "in login"
+    if request.post?
+      if session[:users] = User.authenticate(params[:users][:username], params[:users][:password])
+        puts "***authenticated!"
+        flash[:message]  = "Login successful"
+        @users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: @users }
+        end
+        #redirect_to_stored
+      else
+        flash[:warning] = "Login unsuccessful"
+
+      end
     end
+
   end
 
   # GET /users/1
@@ -78,6 +90,19 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+
+  def login
+    flash[:message]  = "in login"
+    if request.post?
+      if session[:users] = User.authenticate(params[:users][:username], params[:users][:password])
+        puts "***authenticated!"
+        flash[:message]  = "Login successful"
+        #redirect_to_stored
+      else
+        flash[:warning] = "Login unsuccessful"
+      end
     end
   end
 end

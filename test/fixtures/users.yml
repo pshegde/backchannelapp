@@ -11,3 +11,11 @@ two:
   : 
   password: MyString
   : MyString
+
+three:
+  username: prajakta
+  password: hegde
+
+four:
+  username: admin
+  password: admin
