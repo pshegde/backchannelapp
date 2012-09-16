@@ -40,28 +40,18 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    flash[:message]  = "in login"
-    if request.post?
-      if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
-        puts "***authenticated!"
-        @user = User.new(params[:user])
-
-        respond_to do |format|
-          if @user.save
-            format.html { redirect_to @user, notice: 'User was successfully created.' }
-            format.json { render json: @user, status: :created, location: @user }
-          else
-            format.html { render action: "new" }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
-        end
-        flash[:message]  = "Login successful"
-        #redirect_to_stored
+    @user = User.new(params[:user])
+      respond_to do |format|
+       if @user.save
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render json: @user, status: :created, location: @user }
+        redirect_to(:controller=>:posts,:action=>:index)
       else
-        flash[:warning] = "Login unsuccessful"
-        redirect_to(:controller=>:users,:action=>:new)
+      format.html { render action: "new" }
+      format.json { render json: @user.errors, status: :unprocessable_entity }
+      redirect_to(:controller=>:users,:action=>:new)
       end
-    end
+      end
   end
 
   # PUT /users/1
@@ -93,7 +83,7 @@ class UsersController < ApplicationController
   end
 
   def login
-    flash[:message]  = "in login"
+    flash[:message]  = "in logins"
     if request.post?
       if session[:users] = User.authenticate(params[:users][:username], params[:users][:password])
         puts "***authenticated!"
@@ -104,4 +94,6 @@ class UsersController < ApplicationController
       end
     end
   end
-end
+
+  end
+

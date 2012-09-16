@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
     puts u.username
     puts u.password
     return nil if u.nil?
-    return u if password == u.password  #User.encrypt(pass, u.salt)==u.hashed_password
+    return u if User.encrypt(pass, u.salt)==u.password
     nil
   end
 
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   def password=(pass)
     @password=pass
     self.salt = User.random_string(10) if !self.salt?
-    self.hashed_password = User.encrypt(@password, self.salt)
+    self.password = User.encrypt(@password, self.salt)
   end
 
   def self.encrypt(pass, salt)
