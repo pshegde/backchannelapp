@@ -25,7 +25,12 @@
     <%= f.submit %>
   </div>
     <div class="actions">
-      <%= link_to "login", :controller => 'posts',:action => "index"%>
+      <%= submit_tag "Login" %>
+      <% if flash[:notice] %>
+          <div class="notice">
+            <%= flash[:notice] %>
+          </div>
+      <% end %>
     </div>
 
 <% end %>
