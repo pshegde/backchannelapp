@@ -22,15 +22,10 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit "login" %>
+</div>
     <div class="actions">
-      <%= submit_tag "Login" %>
-      <% if flash[:notice] %>
-          <div class="notice">
-            <%= flash[:notice] %>
-          </div>
-      <% end %>
+      <%= link_to "create new user", :controller=>'posts',:action=>'index' %>
     </div>
 
 <% end %>

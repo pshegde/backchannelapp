@@ -1,6 +1,6 @@
 Backchannel::Application.routes.draw do
   #match ':users(/:login)'
-  match 'login' => 'users#index'  , :via => :post
+  #match '/login' => 'posts#index'  , :via => :post
   resources :posts
 
   resources :users
