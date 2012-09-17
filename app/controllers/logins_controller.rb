@@ -25,7 +25,7 @@ class LoginsController < ApplicationController
   # GET /logins/new.json
   def new
     #@login = Logins.new
-    flash[:notice] = nil
+    #flash[:notice] = nil
     #respond_to do |format|
      #format.html # new.html.erb
     #format.json { render json: @login }
