@@ -40,27 +40,22 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    if @user.nil?
 
-      redirect_to :controller => "users", :action => "index"
+    respond_to do |format|
+      if @user.save
+        if session[:user_id].nil?
+          session[:user_id] = @user.id
+          flash[:alert] = "You have successfully logged in"
+          #redirect_to :controller => "posts", :action => "index"
+        end
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
-    @user.save
-    #@user.password = "newpassword"
-    #respond_to do |format|
-     # if @user.save
-      #  if session[:user_id].nil?
-       #   session[:user_id] = @user.id
-        #  flash[:alert] = "You have successfully logged in"
-         # redirect_to :controller => "posts", :action => "index"
-        #end
-        #format.html { redirect_to @user, notice: 'User was successfully created.' }
-        #format.json { render json: @user, status: :created, location: @user }
-      #else
-       # format.html { render action: "new" }
-        #format.json { render json: @user.errors, status: :unprocessable_entity }
-      #end
-    #end
-    redirect_to :controller => "posts", :action => "index"
+    #redirect_to :controller => "posts", :action => "index"
   end
 
   # PUT /users/1

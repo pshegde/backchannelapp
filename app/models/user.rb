@@ -1,31 +1,21 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  attr_accessible   :username, :first_name, :last_name, :email, :password
+  attr_accessible   :username, :first_name, :last_name, :email, :original_password
   has_many :posts
   has_many :comments
   has_many :votes
-
+  #attr_accessor :original_password
 #  validates_length_of :username, :within => 4..10
-  validates_presence_of :password, :username ,:first_name, :last_name, :email
+  validates_presence_of :original_password, :username ,:first_name, :last_name, :email
  # attr_protected :id, :salt
 #  attr_accessor :password    #, :username
-  def password
-    @password
-  end
-
-
 
   def self.authenticate(username, password)
-    puts "username:" + username
-    puts "password:" + password
     u=find(:first, :conditions=>["username = ?", username])
-
     return nil if u.nil?
 
-    puts u.username
-    puts u.password
-    return u if password == u.password#User.encrypt(password, u.salt)==u.password
+    return u if User.encrypt_password(password, u.salt)==u.password
     nil
   end
 
@@ -37,13 +27,22 @@ class User < ActiveRecord::Base
     return newpass
   end
 
-  def password=(pass)
-    @password=pass
-    #self.salt = User.random_string(10) if !self.salt?
-    #password = @password #User.encrypt(@password, self.salt)
+  def self.encrypt_password(pass, salt)
+    Digest::SHA1.hexdigest(pass+salt)
   end
 
-  def self.encrypt(pass, salt)
-    Digest::SHA1.hexdigest(pass+salt)
+  def original_password=(password)
+    @original_password = password
+    return if password.blank?
+    create_new_salt
+    self.password = encrypt_password(password, self.salt)
+  end
+
+  def original_password
+    @original_password
+  end
+
+  def create_new_salt
+    self.salt = self.object_id.to_s + rand.to_s
   end
 end

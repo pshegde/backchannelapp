@@ -41,16 +41,16 @@ class LoginsController < ApplicationController
   # POST /logins
   # POST /logins.json
   def loginUser
-    flash[:message]  = "in login"
+    flash[:notice]  = "in login"   + params[:username]
     if request.post?
-      session[:userid] = User.authenticate(params[:username], params[:password])
+      session[:userid] = User.authenticate(params[:username], params[:original_password])
       if session[:userid] != nil
-        puts "***authenticated!"
-        flash[:message]  = "Login successful"
-        redirect_to(:controller=>:posts,:action=>:index)
+       flash[:notice]  = "Login successful"
+       redirect_to(:controller=>:posts,:action=>:index)
+       #redirect_to(:controller=>:logins,:action=>:new)
       else
-        flash[:warning] = "Login unsuccessful "   + params[:username] + params[:password]
-        redirect_to(:controller=>:logins,:action=>:new)
+       flash[:notice] = "Login unsuccessful "
+       redirect_to(:controller=>:logins,:action=>:new)
       end
     end
   end
