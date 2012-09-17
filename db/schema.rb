@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917025940) do
+ActiveRecord::Schema.define(:version => 20120917034616) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -20,21 +20,28 @@ ActiveRecord::Schema.define(:version => 20120917025940) do
   end
 
   create_table "comment_votes", :force => true do |t|
+    t.integer  "User_id"
+    t.integer  "Post_id"
+    t.integer  "Comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "comments", :force => true do |t|
-    t.string   "content"
+    t.text     "content"
+    t.integer  "Post_id"
+    t.integer  "User_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
-    t.string   "title"
-    t.string   "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "title"
+    t.text     "content"
+    t.integer  "User_id"
+    t.integer  "Category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -50,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20120917025940) do
   end
 
   create_table "votes", :force => true do |t|
+    t.integer  "User_id"
+    t.integer  "Post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
