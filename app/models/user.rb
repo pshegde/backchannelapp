@@ -2,8 +2,12 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   attr_accessible   :username, :first_name, :last_name, :email, :password
+  has_many :posts
+  has_many :comments
+  has_many :votes
+
 #  validates_length_of :username, :within => 4..10
- # validates_presence_of :password, :username
+  validates_presence_of :password, :username ,:first_name, :last_name, :email
  # attr_protected :id, :salt
 #  attr_accessor :password    #, :username
   def password
