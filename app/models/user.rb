@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     u=find(:first, :conditions=>["username = ?", username])
     return nil if u.nil?
 
-    return u if encrypt_password(password, u.salt)==u.password
+    return u if u.encrypt_password(password, u.salt)==u.password
     nil
   end
 
