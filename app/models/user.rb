@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :votes
   #attr_accessor :original_password
 #  validates_length_of :username, :within => 4..10
-  validates_presence_of :original_password, :username ,:first_name, :last_name, :email
+  validates_presence_of  :username ,:first_name, :last_name, :email
  # attr_protected :id, :salt
 #  attr_accessor :password    #, :username
 
@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     u=find(:first, :conditions=>["username = ?", username])
     return nil if u.nil?
 
-    return u if User.encrypt_password(password, u.salt)==u.password
+    return u if encrypt_password(password, u.salt)==u.password
     nil
   end
 
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
     return newpass
   end
 
-  def self.encrypt_password(pass, salt)
+  def encrypt_password(pass, salt)
     Digest::SHA1.hexdigest(pass+salt)
   end
 
