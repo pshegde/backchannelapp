@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
@@ -14,7 +15,6 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -41,17 +40,27 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-      respond_to do |format|
-       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-        redirect_to(:controller=>:posts,:action=>:index)
-      else
-      format.html { render action: "new" }
-      format.json { render json: @user.errors, status: :unprocessable_entity }
-      redirect_to(:controller=>:users,:action=>:new)
-      end
-      end
+    if @user.nil?
+
+      redirect_to :controller => "users", :action => "index"
+    end
+    @user.save
+    #@user.password = "newpassword"
+    #respond_to do |format|
+     # if @user.save
+      #  if session[:user_id].nil?
+       #   session[:user_id] = @user.id
+        #  flash[:alert] = "You have successfully logged in"
+         # redirect_to :controller => "posts", :action => "index"
+        #end
+        #format.html { redirect_to @user, notice: 'User was successfully created.' }
+        #format.json { render json: @user, status: :created, location: @user }
+      #else
+       # format.html { render action: "new" }
+        #format.json { render json: @user.errors, status: :unprocessable_entity }
+      #end
+    #end
+    redirect_to :controller => "posts", :action => "index"
   end
 
   # PUT /users/1
@@ -82,18 +91,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def login
-    flash[:message]  = "in logins"
-    if request.post?
-      if session[:users] = User.authenticate(params[:users][:username], params[:users][:password])
-        puts "***authenticated!"
-        flash[:message]  = "Login successful"
-        #redirect_to_stored
-      else
-        flash[:warning] = "Login unsuccessful"
-      end
-    end
-  end
+
 
   end
 
