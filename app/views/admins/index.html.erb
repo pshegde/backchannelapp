@@ -1,13 +1,15 @@
-<div class= "main">
-  <h2>Admin Page</h2>
-  <% link_to "See Users",:controller => 'users', :action => 'index'%>
-  <% link_to "Make Admin",:controller => 'users', :action => 'edit'%>
-  <% link_to "Revoke Admin",:controller => 'users', :action => 'edit'%>
-  <% link_to "Delete User",:controller => 'users', :action => 'edit'%>
-  <% link_to "Delete Post",:controller => 'posts', :action => 'edit'%>
-  <% link_to "Delete Comment",:controller => 'comment', :action => 'edit'%>
-  <% link_to "Create Category",:controller => 'categories', :action => 'new'%>
-  <% link_to "Delete Category",:controller => 'categories', :action => 'edit'%>
-  <% link_to "Create Category",:controller => 'categories', :action => 'new'%>
 
-</div>
+  <h2>Admin Page</h2>
+
+  <%= link_to "See Users",:controller => 'users', :action => 'index' %>
+  <%= link_to "Make Admin",:controller => 'users', :action => 'index' %>
+  <%= link_to "Revoke Admin",:controller => 'users' , :action => 'index' %>
+  <%= link_to "Delete User",:controller => 'users' ,:action => 'index' %>
+  <%= link_to "Delete Post",:controller => 'posts' , :action => 'index' %>
+  <%= link_to "Delete Comment",:controller => 'comments', :action => 'index'%>
+  <%= link_to "Create Category",:controller => 'categories', :action => 'new'%>
+  <%= link_to "Delete Category",:controller => 'categories', :action => 'index'%>
+  <%= link_to "Create Category",:controller => 'categories', :action => 'new'%>
+
+
+
