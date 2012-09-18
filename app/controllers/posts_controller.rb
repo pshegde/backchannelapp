@@ -26,13 +26,19 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
+    @user = session[:user_id]
+    #@post.votesnum = 0
+    session[:post] = @post.id
+    if @user != nil
+        respond_to do |format|
+          format.html # new.html.erb
+          format.json { render json: @post }
+        end
+    else
+        flash[:alert] = "Please Login Before Posting"
+        redirect_to :controller => "posts", :action => "index"
     end
-  end
-
+   end
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
@@ -42,7 +48,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-
+    #@post.User_id = session[:user_id]
+    #@post.votesnum = 0
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -58,7 +65,7 @@ class PostsController < ApplicationController
   # PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
-
+    @post.User_id = session{:user_id}
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -74,6 +81,9 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post = Post.find(params[:id])
+
+    ###### Code block to delete the corresponding votes and comments #############
+
     @post.destroy
 
     respond_to do |format|

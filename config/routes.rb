@@ -2,6 +2,7 @@ Backchannel::Application.routes.draw do
   resources :comment_votes
 
   resources :votes
+  match "/posts/new" => "posts#new"
 
   #match ':users(/:logins)'
   #match '/logins' => 'posts#index'  , :via => :post
