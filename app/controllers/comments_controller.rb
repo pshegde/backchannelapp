@@ -94,4 +94,46 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def incrementVote
+    @comment = Comment.find(params[:comment_id_for_vote])
+    firstTimeVote = false
+    if checkIfVotingAgain(params[:comment_id_for_vote],session[:user_id].id) == false
+      firstTimeVote = true
+    else
+      flash[:alert] = "Sorry. You cannot like a comment more than once."
+    end
+
+    if session[:user_id].id == @comment.User_id
+      flash[:alert] = "Sorry. You cannot like on your own comment."
+    end
+
+    if session[:user_id].id != @comment.User_id  and firstTimeVote == true
+      #1. insert in commentvote
+      @CommentVote = CommentVote.new
+      @CommentVote.Post_id= params[:comment_id_for_vote]
+      @CommentVote.User_id= session[:user_id].id   #user who voted
+
+      @CommentVote.save
+
+      #2. update numvotes in Post
+      @comment.update_attributes(:num_votes => Integer(@comment.num_votes) +1)
+      flash[:alert] = "Your vote for the comment was registered successfully."
+    end
+    redirect_to :controller => "comments", :action => "index"
+  end
+
+  def checkIfVotingAgain(comment_id,loggedin_user_id)
+    @votes = CommentVote.all
+
+    @votes.each do |vote|
+      flash[:alert] = vote.User_id.to_s +  vote.Comment_id.to_s
+      if  vote.User_id and  vote.Comment_id
+        if vote.User_id.to_s == loggedin_user_id.to_s and vote.Comment_id.to_s == comment_id.to_s
+          return true
+        end
+      end
+    end
+    return false
+  end
 end
