@@ -29,11 +29,13 @@ class PostsController < ApplicationController
     @user = session[:user_id]
     #@post.votesnum = 0
     session[:post] = @post.id
+    flash[:alert] = @user.id
     if @user != nil
         respond_to do |format|
           format.html # new.html.erb
           format.json { render json: @post }
         end
+        #redirect_to :controller => "posts", :action => "index"
     else
         flash[:alert] = "Please Login Before Posting"
         redirect_to :controller => "posts", :action => "index"
@@ -48,7 +50,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-    #@post.User_id = session[:user_id]
+    @post.User_id = session[:user_id].id
     #@post.votesnum = 0
     respond_to do |format|
       if @post.save
@@ -65,7 +67,7 @@ class PostsController < ApplicationController
   # PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
-    @post.User_id = session{:user_id}
+    @post.User_id = session[:user_id]
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }

@@ -23,4 +23,10 @@
 
 <br />
 
+<% if flash[:alert] %>
+    <div  style='font-color:#CC0000;font-weight:bold;'>
+      <%= flash[:alert] %>
+    </div>
+<% end %>
+
 <%= link_to 'Post a Question', :controller => "posts", :action => "new" %>

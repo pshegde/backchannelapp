@@ -43,11 +43,11 @@ class LoginsController < ApplicationController
   def loginUser
     #flash[:notice]  = "in login"   + params[:username]
     if request.post?
-      session[:userid] = User.authenticate(params[:username], params[:original_password])
-      if session[:userid] != nil
+      session[:user_id] = User.authenticate(params[:username], params[:original_password])
+      if session[:user_id] != nil
         #flash[:notice]  = "Login successful"
         #check if admin redirect to admin page
-        if session[:userid].admin == true
+        if session[:user_id].admin == true
           session[:isadmin] =  true
           redirect_to(:controller=>:admins,:action=>:index)
         else
