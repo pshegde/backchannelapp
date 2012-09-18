@@ -30,7 +30,7 @@ class LoginsController < ApplicationController
      #format.html # new.html.erb
     #format.json { render json: @login }
     #end
-
+     session[:user_id] = nil
   end
 
   # GET /logins/1/edit
@@ -88,5 +88,12 @@ class LoginsController < ApplicationController
       format.html { redirect_to logins_url }
       format.json { head :no_content }
     end
+  end
+
+  def logoutUser
+    session[:user_id] = nil
+    session[:isadmin]= false
+    flash[:alert] = "Successfully Logged out"
+    redirect_to(:controller=>:logins,:action=>:new)
   end
 end

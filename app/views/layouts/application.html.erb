@@ -13,8 +13,13 @@
       </div>
      <div id="columns">
       <div id="side">
-           <a href="">Home</a>
-           <a href=""></a>
+           <a href="">Home</a>  <br>
+        <% if session[:user_id] %>
+            <div  style='font-color:#CC0000;font-weight:bold;'>
+              <a href="/logout">Logout</a>
+            </div>
+        <% end %>
+        <br>
       </div>
       <div id="main">
             <%= yield :layout%>

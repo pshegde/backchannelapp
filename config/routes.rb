@@ -3,7 +3,7 @@ Backchannel::Application.routes.draw do
 
   resources :votes
   match "/posts/new" => "posts#new"
-
+  match "logout" => "logins#logoutUser"
   #match ':users(/:logins)'
   #match '/logins' => 'posts#index'  , :via => :post
   resources :posts
