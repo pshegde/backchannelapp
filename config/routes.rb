@@ -1,4 +1,5 @@
 Backchannel::Application.routes.draw do
+  match '/admin/reports' => "admins#reports" ,:via => :get
   match "/commentsforpost/new" => "comments#new" ,:via => :get
   resources :comment_votes
 

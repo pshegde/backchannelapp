@@ -1,0 +1,19 @@
+<h1>Listing posts</h1>
+<table>
+  <tr>
+    <th>Post</th>
+    <th>No. Votes</th>
+    <th>Created By</th>
+    <th>No. of Comments</th>
+  </tr>
+  <%if @votesperuser%>
+  <% @votesperuser.each do |post| %>
+
+      <tr>
+        <td><%# post.title %></td>
+        <td><%# Category.find(post.Category_id).name %></td>
+        <td><%# User.find(post.User_id).username %></td>
+      </tr>
+  <% end %>
+   <%end%>
+</table>

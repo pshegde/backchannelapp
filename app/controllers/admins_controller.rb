@@ -29,7 +29,7 @@ class AdminsController < ApplicationController
 
   # GET /admins/1/edit
   def edit
-    @admin = Admin.find(params[:id])
+   # @admin = Admin.find(params[:id])
   end
 
   # POST /admins
@@ -74,5 +74,10 @@ class AdminsController < ApplicationController
       format.html { redirect_to admins_url }
       format.json { head :no_content }
     end
+  end
+
+  def reports
+    #add values in @votesperuser here so hey can be used in reports
+
   end
 end
