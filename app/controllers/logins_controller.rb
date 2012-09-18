@@ -25,7 +25,7 @@ class LoginsController < ApplicationController
   # GET /logins/new.json
   def new
     #@login = Logins.new
-    flash[:notice] = nil
+    #flash[:notice] = nil
     #respond_to do |format|
      #format.html # new.html.erb
     #format.json { render json: @login }
@@ -41,16 +41,23 @@ class LoginsController < ApplicationController
   # POST /logins
   # POST /logins.json
   def loginUser
-    flash[:notice]  = "in login"   + params[:username]
+    #flash[:notice]  = "in login"   + params[:username]
     if request.post?
       session[:userid] = User.authenticate(params[:username], params[:original_password])
       if session[:userid] != nil
-       flash[:notice]  = "Login successful"
-       redirect_to(:controller=>:posts,:action=>:index)
-       #redirect_to(:controller=>:logins,:action=>:new)
+        #flash[:notice]  = "Login successful"
+        #check if admin redirect to admin page
+        if session[:userid].admin == true
+          session[:isadmin] =  true
+          redirect_to(:controller=>:admins,:action=>:index)
+        else
+          #check if not admin redirect to posts
+          session[:isadmin] =  false
+          redirect_to(:controller=>:posts,:action=>:index)
+        end
       else
-       flash[:notice] = "Login unsuccessful "
-       redirect_to(:controller=>:logins,:action=>:new)
+        flash[:alert] = "Login unsuccessful"
+        redirect_to(:controller=>:logins,:action=>:new)
       end
     end
   end

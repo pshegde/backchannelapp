@@ -7,10 +7,12 @@ Backchannel::Application.routes.draw do
   #match ':users(/:logins)'
   #match '/logins' => 'posts#index'  , :via => :post
   resources :posts
-
+  resources :admins
   resources :users
   match 'loginUser' => 'logins#loginUser'  , :via => :post
   resources :logins
+  resources :comments
+  resources :categories
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

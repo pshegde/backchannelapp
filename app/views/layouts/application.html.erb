@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+      <div id="banner">
+              <%= image_tag("rails.png")     %>
+              <h1>BackChannel App</h1>
+      </div>
+     <div id="columns">
+      <div id="side">
+           <a href="">Home</a>
+           <a href=""></a>
+      </div>
+      <div id="main">
+            <%= yield :layout%>
+      </div>
+      </div>
 </body>
 </html>

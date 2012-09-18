@@ -2,12 +2,8 @@ class AdminsController < ApplicationController
   # GET /admins
   # GET /admins.json
   def index
-    @admins = Admin.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @admins }
-    end
+
   end
 
   # GET /admins/1
@@ -20,7 +16,6 @@ class AdminsController < ApplicationController
       format.json { render json: @admin }
     end
   end
-
   # GET /admins/new
   # GET /admins/new.json
   def new
