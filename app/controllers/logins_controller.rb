@@ -44,6 +44,7 @@ class LoginsController < ApplicationController
     #flash[:notice]  = "in login"   + params[:username]
     if request.post?
       session[:user_id] = User.authenticate(params[:username], params[:original_password])
+
       if session[:user_id] != nil
         #flash[:notice]  = "Login successful"
         #check if admin redirect to admin page
@@ -54,6 +55,7 @@ class LoginsController < ApplicationController
           #check if not admin redirect to posts
           session[:isadmin] =  false
           redirect_to(:controller=>:posts,:action=>:index)
+          #redirect_to(:controller=>:logins,:action=>:new)
         end
       else
         flash[:alert] = "Login unsuccessful"

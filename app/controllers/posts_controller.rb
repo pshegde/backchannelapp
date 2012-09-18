@@ -27,8 +27,8 @@ class PostsController < ApplicationController
     @post = Post.new
     @user = session[:user_id]
     #@post.votesnum = 0
-    flash[:alert] = @user.id
-    session[:post_id]=@post.id
+    flash[:alert] =  session[:user_id].username
+    #session[:post_id]=@post.id
     if @user != nil
         respond_to do |format|
           format.html # new.html.erb
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-    @post.User_id = session[:user_id]
+    @post.User_id = session[:user_id].id
 
     #@post.votesnum = 0
     respond_to do |format|
@@ -70,7 +70,7 @@ class PostsController < ApplicationController
   # PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
-    @post.User_id = session[:user_id]
+    @post.User_id = session[:user_id].id
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }

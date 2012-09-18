@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
     #@comment = Comment.new()
     @comment = Comment.new(params[:comment])
    @comment.Post_id= session[:post_id_passed]
-   @comment.User_id = session[:user_id]
+   @comment.User_id = session[:user_id].id
     #@comment.post_id = session[:post_id]
     #@comment.post_id = params[:comment][:post_id]
     #flash[:alert] = @comment.post_id
