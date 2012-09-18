@@ -20,7 +20,7 @@
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <td><%= link_to 'Comment', new_comment_path(post) %></td>
-    <td><%= link_to 'Comment2', :controller => 'comments',:action => 'new' %></td>
+    <td><a href=<%="/commentsforpost/new?post_id_passed=" + post.id.to_s%>>Comment2</a> </td>
 
   </tr>
 <% end %>

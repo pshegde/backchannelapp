@@ -1,7 +1,9 @@
 Backchannel::Application.routes.draw do
+  match "/commentsforpost/new" => "comments#new" ,:via => :get
   resources :comment_votes
 
   resources :votes
+
   match "/posts/new" => "posts#new"
   match "logout" => "logins#logoutUser"
   #match ':users(/:logins)'

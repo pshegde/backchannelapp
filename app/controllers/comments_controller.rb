@@ -26,10 +26,9 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
     @user = session[:user_id]
-    @post_id = params[:post_id]
-    @post_title = params[:post_title]
-    @post_content = params[:post_content]
-    flash[:alert] = params[:post_id]
+    session[:post_id_passed] = params[:post_id_passed]
+
+    flash[:alert] =  session[:post_id_passed]
     if @user != nil
       respond_to do |format|
         format.html # new.html.erb
@@ -49,14 +48,13 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new()
-    #@comment = Comment.new(params[:comment])
-    @user_id = session[:user_id]
-    @comment.content = params[:comment][:content]
-    @comment.user_id = @user_id
+    #@comment = Comment.new()
+    @comment = Comment.new(params[:comment])
+   @comment.Post_id= session[:post_id_passed]
+   @comment.User_id = session[:user_id]
     #@comment.post_id = session[:post_id]
-    @comment.post_id = params[:comment][:post_id]
-    flash[:alert] = @comment.post_id
+    #@comment.post_id = params[:comment][:post_id]
+    #flash[:alert] = @comment.post_id
 
     respond_to do |format|
       if @comment.save
