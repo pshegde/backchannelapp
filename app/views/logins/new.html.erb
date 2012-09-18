@@ -30,10 +30,9 @@
           </div>
       <%=  %>
 
-
-      <% if flash[:notice] %>
-          <div class="notice">
-            <%= flash[:notice] %>
+      <% if flash[:alert] %>
+          <div  style='font-color:#CC0000;font-weight:bold;'>
+            <%= flash[:alert] %>
           </div>
       <% end %>
     </fieldset>

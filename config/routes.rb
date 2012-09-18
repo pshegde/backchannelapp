@@ -6,7 +6,7 @@ Backchannel::Application.routes.draw do
   #match ':users(/:logins)'
   #match '/logins' => 'posts#index'  , :via => :post
   resources :posts
-
+  resources :admins
   resources :users
   match 'loginUser' => 'logins#loginUser'  , :via => :post
   resources :logins
@@ -61,7 +61,7 @@ Backchannel::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'admins#index'
+  root :to => 'logins#new'
 
   # See how all your routes lay out with "rake routes"
 
