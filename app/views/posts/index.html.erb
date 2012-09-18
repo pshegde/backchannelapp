@@ -4,7 +4,8 @@
   <tr>
     <th>Title</th>
     <th>Content</th>
-    <th>User</th>
+    <th>Category</th>
+    <th>Author</th>
     <th></th>
     <th></th>
   </tr>
@@ -13,7 +14,8 @@
   <tr>
     <td><%= post.title %></td>
     <td><%= post.content %></td>
-    <td><%= post.created_at%></td>
+    <td><%= Category.find(post.Category_id).name %></td>
+    <td><%= User.find(post.User_id).username %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>

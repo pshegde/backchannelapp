@@ -12,7 +12,12 @@
 
 <p>
   <b>Category:</b>
-  <%= @post.category %>
+  <%= Category.find(@post.Category_id).name %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= User.find(@post.User_id).username %>
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

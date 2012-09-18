@@ -19,7 +19,12 @@
     <%= f.label :content %><br />
     <%= f.text_field :content %>
   </div>
-  <div class="actions">
+  <div class= "field">
+    <%= f.label :category %>
+    <%= select("post", "Category_id", Category.all.collect{ |c| [ c.name, c.id] }) %>
+
+  </div>
+      <div class="actions">
     <%= f.submit %>
   </div>
 
