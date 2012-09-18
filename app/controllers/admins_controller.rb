@@ -78,7 +78,8 @@ class AdminsController < ApplicationController
 
   def reports
     #add values in @votesperuser here so hey can be used in reports
-    #@votesComments = CommentVote.all
-    #@votesPosts = PostVote.all
+    #@comments = Comment.all
+    #@posts = Post.all
+    @users = User.all
   end
 end

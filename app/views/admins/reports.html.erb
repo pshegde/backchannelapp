@@ -1,19 +1,48 @@
 <h1>Listing posts</h1>
 <table>
-  <tr>
-    <th>Post</th>
-    <th>No. Votes</th>
-    <th>Created By</th>
-    <th>No. of Comments</th>
-  </tr>
-  <%if @votesperuser%>
-  <% @votesperuser.each do |post| %>
 
+  <%if @users%>
       <tr>
-        <td><%# post.title %></td>
-        <td><%# Category.find(post.Category_id).name %></td>
-        <td><%# User.find(post.User_id).username %></td>
+        <th>User</th>
+        <th>Posts</th>
+        <th>Comments</th>
+        <th>Total Votes received Posts|</th>
+        <th>Total Votes received Comments|</th>
+        <th>Total Votes|</th>
       </tr>
-  <% end %>
+      <% @numPosts=0;@numComments=0;@numVotes=0;%>
+      <% @users.each do |user| %>
+          <% @numVotesOnPosts = 0; @numVotesOnComments = 0; %>
+          <% @posts = User.find(user.id).posts%>
+          <% @numPosts = @posts.size %>
+
+          <% @posts.each do |post| %>
+              <%@numVotesOnPosts = Integer(@numVotesOnPosts) + Integer(post.num_votes)   %>
+          <%end%>
+
+          <% @comments = User.find(user.id).comments%>
+          <% @numComments = @comments.size %>
+
+          <% @comments.each do |comment| %>
+              <%@numVotesOnComments = Integer(@numVotesOnComments) + Integer(comment.num_votes)   %>
+          <%end%>
+
+          <% @numVotes = Integer(@numVotesOnPosts) + Integer(@numVotesOnComments)  %>
+          <tr>
+            <td><%= user.username %></td>
+           <td><%= @numPosts %></td>
+            <td><%= @numComments %></td>
+            <td><%= @numVotesOnPosts %></td>
+            <td><%= @numVotesOnComments %></td>
+            <td><%= @numVotes %></td>
+          </tr>
+      <% end %>
    <%end%>
 </table>
+
+
+<% if flash[:alert] %>
+    <div  style='font-color:#CC0000;font-weight:bold;'>
+      <%= flash[:alert] %>
+    </div>
+<% end %>
