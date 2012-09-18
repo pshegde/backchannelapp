@@ -1,5 +1,10 @@
 <h1>Listing posts</h1>
-
+<h3>Hello</h3>
+<% if session[:user_id] %>
+    <div  style='font-color:#CC0000;font-weight:bold;'>
+      <%=session[:user_id].username%>
+    </div>
+<%end%>
 <table>
   <tr>
     <th>Title</th>
