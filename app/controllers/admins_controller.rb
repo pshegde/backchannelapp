@@ -16,7 +16,6 @@ class AdminsController < ApplicationController
       format.json { render json: @admin }
     end
   end
-
   # GET /admins/new
   # GET /admins/new.json
   def new
