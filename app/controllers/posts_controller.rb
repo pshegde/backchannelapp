@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   def index
 
     @posts = Post.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -28,8 +27,8 @@ class PostsController < ApplicationController
     @post = Post.new
     @user = session[:user_id]
     #@post.votesnum = 0
-    session[:post] = @post.id
     flash[:alert] = @user.id
+    session[:post_id]=@post.id
     if @user != nil
         respond_to do |format|
           format.html # new.html.erb
@@ -50,12 +49,16 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-    @post.User_id = session[:user_id].id
+    @post.User_id = session[:user_id]
+
     #@post.votesnum = 0
     respond_to do |format|
       if @post.save
+        #session[:post_id] = @post.id
+        #flash[:alert] = @post.id
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
+
       else
         format.html { render action: "new" }
         format.json { render json: @post.errors, status: :unprocessable_entity }

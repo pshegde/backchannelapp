@@ -25,11 +25,20 @@ class CommentsController < ApplicationController
   # GET /comments/new.json
   def new
     @comment = Comment.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @comment }
-    end
+    @user = session[:user_id]
+    @post_id = params[:post_id]
+    @post_title = params[:post_title]
+    @post_content = params[:post_content]
+    flash[:alert] = params[:post_id]
+    if @user != nil
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @comment }
+      end
+    else
+      flash[:alert] = "Please Login Before Posting"
+      redirect_to :controller => "posts", :action => "index"
+     end
   end
 
   # GET /comments/1/edit
@@ -40,7 +49,14 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new()
+    #@comment = Comment.new(params[:comment])
+    @user_id = session[:user_id]
+    @comment.content = params[:comment][:content]
+    @comment.user_id = @user_id
+    #@comment.post_id = session[:post_id]
+    @comment.post_id = params[:comment][:post_id]
+    flash[:alert] = @comment.post_id
 
     respond_to do |format|
       if @comment.save
