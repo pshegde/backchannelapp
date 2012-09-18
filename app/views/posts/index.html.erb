@@ -24,8 +24,9 @@
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= post.num_votes %></td>
     <td><a href=<%="/commentsforpost/new?post_id_passed=" + post.id.to_s%>>Comment</a> </td>
-
+    <td><a href=<%="/voteforpost/incrementVote?post_id_for_vote=" + post.id.to_s%>>Vote</a></td>
   </tr>
 <% end %>
 </table>
@@ -34,12 +35,7 @@
 
 <% if flash[:alert] %>
     <div  style='font-color:#CC0000;font-weight:bold;'>
-
-      <% params[:post].each do |param| %>
-          <%= param.capitalize %>
-      <% end %>
-
-      <%= flash[:alert] %>
+        <%= flash[:alert] %>
     </div>
 <% end %>
 

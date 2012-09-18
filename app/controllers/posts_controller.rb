@@ -96,4 +96,47 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  def incrementVote
+    @post = Post.find(params[:post_id_for_vote])
+    firstTimeVote = false
+    if checkIfVotingAgain(params[:post_id_for_vote],session[:user_id].id) == false
+      firstTimeVote = true
+    else
+      flash[:alert] = "Sorry. You cannot like a post more than once."
+    end
+
+    if session[:user_id].id == @post.User_id
+      flash[:alert] = "Sorry. You cannot like on your own post."
+    end
+
+    if session[:user_id].id != @post.User_id  and firstTimeVote == true
+      #1. insert in votes
+      @vote = Vote.new
+      @vote.Post_id= params[:post_id_for_vote]
+      @vote.User_id= session[:user_id].id   #user who voted
+
+      @vote.save
+
+      #2. update numvotes in Post
+      @post.update_attributes(:num_votes => Integer(@post.num_votes) +1)
+      flash[:alert] = "Your vote was registered successfully."
+    end
+    redirect_to :controller => "posts", :action => "index"
+  end
+
+  def checkIfVotingAgain(post_id,loggedin_user_id)
+    @votes = Vote.all
+
+    @votes.each do |vote|
+      flash[:alert] = vote.User_id.to_s +  vote.Post_id.to_s
+      if  vote.User_id and  vote.Post_id
+         if vote.User_id.to_s == loggedin_user_id.to_s and vote.Post_id.to_s == post_id.to_s
+            return true
+         end
+      end
+    end
+    return false
+  end
 end
