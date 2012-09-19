@@ -104,11 +104,11 @@ class PostsController < ApplicationController
     if checkIfVotingAgain(params[:post_id_for_vote],session[:user_id].id) == false
       firstTimeVote = true
     else
-      flash[:alert] = "Sorry. You cannot like a post more than once."
+      flash[:alert] = "Sorry. You cannot vote for a post more than once."
     end
 
     if session[:user_id].id == @post.User_id
-      flash[:alert] = "Sorry. You cannot like on your own post."
+      flash[:alert] = "Sorry. You cannot vote for your own post."
     end
 
     if session[:user_id].id != @post.User_id  and firstTimeVote == true
