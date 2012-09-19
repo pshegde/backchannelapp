@@ -3,7 +3,7 @@ require 'test/unit'
 require_relative '../../app/models/user'
 
 class UserTest < Test::Unit::TestCase
-  fixtures :users
+  #fixtures :users
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
@@ -21,9 +21,11 @@ class UserTest < Test::Unit::TestCase
     assert true
   end
 
-  def test_if_valid_user_created
+  def test_if_no_username
    user = User.new
    assert !user.valid?
   end
+
+
 end
 
