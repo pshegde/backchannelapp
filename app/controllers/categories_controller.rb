@@ -12,6 +12,24 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   # GET /categories/1.json
+  def search
+    #@posts = Post.find_all_by_content(params[:input])
+    #@categories = Category.find_all_by_name(params[:input])
+    #@posts = Post.where("content LIKE '%#{params[:input]}%'")
+    @cat_id = Category.find_all_by_name(param[:input])
+    @posts = Post.where("Category_id LIKE @cat_id.id")#, :cat_id => '%#{ Category.fi (param[:input])}%')
+                                                      #@posts = Post.where("content LIKE ?","%"+(params[:input])+"%")
+    if @posts.length != 0
+      respond_to do |format|
+        format.html # search.html.erb
+        format.json { render json: @posts }
+      end
+    else
+      flash[:alert] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
+      redirect_to :controller => "posts", :action => "index"
+    end
+  end
+
   def show
     @category = Category.find(params[:id])
 
