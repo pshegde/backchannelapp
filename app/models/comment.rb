@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :content ,:Post_id ,:num_votes
+  attr_accessible :content ,:Post_id ,:num_votes, :updated_at
   belongs_to :post
   belongs_to :user
   has_many :comment_votes
