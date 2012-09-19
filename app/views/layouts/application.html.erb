@@ -10,12 +10,12 @@
       <div id="banner">
         <span>
               <%= image_tag("rails.png")%>
-              <h1>Backchannel App</h1>
+              <h1>Backchannel Application</h1>
         </span>
 
         <span id="search" style='font-size:20px;position: absolute;right: 20px;top:30px; padding: 10px;border:2px solid #79B7E7;border-color: #000000;'>
 
-              Search by user or post:  <br/>
+              Search by user/post/category:  <br/>
             <form action="/users/search" method="get" id="search_form">
               <input id="search_input" class="searchBox" type="text" name="input"/>
               <input type="submit" id="user" class="searchButton" name="usearch" value="user"/>
@@ -24,12 +24,17 @@
               <input id="search_input1" class="searchBox" type="text" name="input"/>
               <input type="submit" id="post" class="searchButton" name="psearch" value="post"/>
             </form>
+             <form action="/categories/search" method="get" id="search_form2">
+               <input id="search_input2" class="searchBox" type="text" name="input"/>
+               <input type="submit" id="category" class="searchButton" name="csearch" value="Category"/>
+             </form>
          </span>
       </div>
       <div id="columns">
       <div id="side">
-           <a href="/posts">Home</a>  <br>
+
            <% if session[:user_id] %>
+                <a href="/posts">Home</a>  <br>
                 <a href="/logout">Logout</a>
            <% end %>
       </div>

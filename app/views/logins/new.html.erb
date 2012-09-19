@@ -4,7 +4,7 @@
   <div class="main">
     <fieldset>
       <legend>
-        Please Log In
+         Log In To Backchannel
       </legend>
 
       <%= form_tag  '/loginUser', :method => :post%>
@@ -22,12 +22,11 @@
           </p>
 
 
-          <p>
+      <div class="actions">
             <%= submit_tag "Login" %>
-          </p>
-          <div class="actions">
-            <%= link_to "create new user" ,:controller=>'users',:action=>'new' %>
-          </div>
+            &nbsp;&nbsp;&nbsp;New user?<%= link_to "Sign up" ,:controller=>'users',:action=>'new' %>
+      </div>
+
       <%=  %>
 
       <% if flash[:alert] %>

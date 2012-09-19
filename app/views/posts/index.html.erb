@@ -5,7 +5,7 @@
             <%= flash[:alert] %>
           </div>
       <% end %>
-    <h1>Listing posts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="position:absolute;right: 15px;"> Welcome,
+    <h1>A Brief Listing of Posts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="position:absolute;right: 15px;"> Welcome,
       <% if session[:user_id] %>
           <%=session[:user_id].username%>!
       <%end%>
@@ -21,7 +21,7 @@
           <div style="background-color: #00bfff;font-size:15px;">
             <b><%= post.title %>  </b>
 
-            <% if session[:isadmin] ==true %>
+            <% if session[:isadmin] ==true or session[:user_id].id ==post.User_id %>
                 &nbsp;&nbsp;&nbsp;<td><%= link_to 'Edit', edit_post_path(post) %></td>
                 &nbsp;&nbsp;&nbsp;<td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
             <%end%>
@@ -39,7 +39,16 @@
         <div style="background-color: #7fffd4;">
            <b>Comments:</b>  <br>
            <% @commentsForPost.each do |comment| %>
-           <%=comment.content%> <br>
+              <%=comment.content%>
+              &nbsp;&nbsp;&nbsp;Posted by:<%=User.find(comment.User_id).username%>
+              <% if session[:isadmin] ==true or session[:user_id].id ==comment.User_id %>
+                  &nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_comment_path(comment) %>
+                  &nbsp;&nbsp;&nbsp;<%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%end%>
+
+              &nbsp;&nbsp;&nbsp;<a href=<%="/voteforcomment/incrementVote?comment_id_for_vote=" + comment.id.to_s%>>Vote</a>
+              &nbsp;&nbsp;&nbsp;<%= comment.num_votes %>  Votes
+            <br>
            <%end%>
           </div>
     <hr/>
