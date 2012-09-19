@@ -1,0 +1,32 @@
+<% if session[:user_id] == nil %>
+    <%= link_to 'login', :controller => "logins", :action => "index" %>
+    <br>
+<% end %>
+
+<%= link_to 'Post a Question', new_post_path %>
+<br>
+
+<h4>Questions</h4>
+<table style="width: 100%">
+
+  <% @posts.each do |post| %>
+      <tr>
+        <td>
+          <p class="title"> <b>Title</b> <%= post.title %>
+          <p class="content"> <b>Content</b> <%= post.content %>
+          <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
+          </p>          </p>             </p>
+          <% if session[:admin] !=false || session[:user_id].user_name == post.user.user_name %>
+
+              <%= link_to 'Show', post %>
+              <%= link_to 'Edit', edit_post_path(post) %>
+              <%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+</div>
+</div>
+<br/>

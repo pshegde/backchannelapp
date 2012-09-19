@@ -2,6 +2,9 @@ Backchannel::Application.routes.draw do
   match '/admin/reports' => "admins#reports" ,:via => :get
   match '/voteforpost/incrementVote' => "posts#incrementVote", :via => :get
   match "/commentsforpost/new" => "comments#new" ,:via => :get
+  match "/users/search" => "users#search"
+  match "/posts/search" => "posts#search"
+
   resources :comment_votes
 
   resources :votes
