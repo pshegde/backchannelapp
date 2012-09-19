@@ -111,7 +111,7 @@ class CommentsController < ApplicationController
     if session[:user_id].id != @comment.User_id  and firstTimeVote == true
       #1. insert in commentvote
       @CommentVote = CommentVote.new
-      @CommentVote.Post_id= params[:comment_id_for_vote]
+      @CommentVote.Comment_id= params[:comment_id_for_vote]
       @CommentVote.User_id= session[:user_id].id   #user who voted
 
       @CommentVote.save
@@ -127,7 +127,6 @@ class CommentsController < ApplicationController
     @votes = CommentVote.all
 
     @votes.each do |vote|
-      flash[:alert] = vote.User_id.to_s +  vote.Comment_id.to_s
       if  vote.User_id and  vote.Comment_id
         if vote.User_id.to_s == loggedin_user_id.to_s and vote.Comment_id.to_s == comment_id.to_s
           return true

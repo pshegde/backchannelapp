@@ -144,7 +144,6 @@ class PostsController < ApplicationController
     @votes = Vote.all
 
     @votes.each do |vote|
-      flash[:alert] = vote.User_id.to_s +  vote.Post_id.to_s
       if  vote.User_id and  vote.Post_id
          if vote.User_id.to_s == loggedin_user_id.to_s and vote.Post_id.to_s == post_id.to_s
             return true
