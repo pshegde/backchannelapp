@@ -1,10 +1,9 @@
-<% if session[:user_id] == nil %>
-    <%= link_to 'login', :controller => "logins", :action => "index" %>
-    <br>
-<% end %>
+<% if session[:user_id] != nil %>
+
+
 
 <%= link_to 'Post a Question', new_post_path %>
-<br>
+<br xmlns="http://www.w3.org/1999/html">
 
 <h4>Questions</h4>
 <table style="width: 100%">
@@ -30,3 +29,7 @@
 </div>
 </div>
 <br/>
+<%else%>
+    <h1> <b>Sorry!! you are not logged in</b></h1>
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>
