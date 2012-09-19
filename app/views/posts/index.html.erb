@@ -95,17 +95,17 @@
 <% end %>
 <br />
 
-<%else%>
-    <h2>No posts found.</h2> <br>
- <%end%>
+
 <%= link_to 'Post a Question', :controller => "posts", :action => "new" %>
-    &nbsp; &nbsp;
-    <% if session[:isadmin] == true %>
+
+        <% if session[:isadmin] == true %>
         <%= link_to 'Admin Home Page', :controller => "admins", :action => "index" %>
-
-
+         <%end%>
+    <%else%>
+        <h2>No posts found.</h2> <br>
+    <%end%>
     <%if session[:user_id].nil?  %>
         <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
      <%end%>
-<%end%>
+
 

@@ -34,7 +34,8 @@
         <br>
 
 <% else%>
-  <h3><%= link_to 'Post a Question', new_post_path %>     </h3>
+  <h3><%= link_to 'Post a Question', new_post_path %>
+    &nbsp; &nbsp;
+    <%= link_to 'See all posts', :controller => "posts", :action => "index" %>    </h3>
 
-    <br>
 <%end%>
