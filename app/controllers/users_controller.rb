@@ -17,7 +17,8 @@ class UsersController < ApplicationController
     if @user != nil
       @posts = Post.find_all_by_User_id(@user.id)
       if @posts.length != 0
-        respond_to do |format|
+        flash[:alert] = "Posts found are listed below:"
+            respond_to do |format|
           format.html #search.html.erb
           format.json { render json: @posts }
         end
