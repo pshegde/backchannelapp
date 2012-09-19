@@ -2,14 +2,18 @@
   <h2>Admin Page</h2>
    <h3> Welcome!!!</h3>
   <%= link_to "See Users",:controller => 'users', :action => 'index'%>
-  <%= link_to "Make Admin",:controller => 'users', :action => 'index' %>
-  <%= link_to "Revoke Admin",:controller => 'users' , :action => 'index' %>
-  <%= link_to "Delete User",:controller => 'users' ,:action => 'index' %>
+  &nbsp; &nbsp; &nbsp;
   <%= link_to "Delete Post",:controller => 'posts' , :action => 'index' %>
+    &nbsp; &nbsp; &nbsp;
   <%= link_to "Delete Comment",:controller => 'comments', :action => 'index'%>
+    &nbsp; &nbsp; &nbsp;
   <%= link_to "Create Category",:controller => 'categories', :action => 'new'%>
+    &nbsp; &nbsp; &nbsp;
   <%= link_to "Delete Category",:controller => 'categories', :action => 'index'%>
+    &nbsp; &nbsp; &nbsp;
   <%= link_to "Reports", '/admin/reports'%>
 
+  <%else%>
+    <h1>Sorry you are not administrator!</h1>
 <%end%>
 

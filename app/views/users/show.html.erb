@@ -20,5 +20,8 @@
   <b>Email:</b>
   <%= @user.email %>
 </p>
-
-<%= link_to 'Proceed to Posts',:controller=>'posts',:action=>'index'%>
+<%if session[:isadmin] !=false %>
+    <%= link_to 'admin home page', :controller => 'admins', :action => 'index' %>
+  <%else%>
+    <%= link_to 'Proceed to Posts',:controller=>'posts',:action=>'index'%>
+ <%end%>
