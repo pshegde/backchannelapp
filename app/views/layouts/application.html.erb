@@ -16,11 +16,15 @@
           <span> Search by user or post:</span>  <br/>  <br/>
           <form action="/users/search" method="get" id="search_form">
             <input id="search_input" class="searchBox" type="text" name="input"/>
-            <input type="submit" id="user" class="searchButton" name="usearch" value="user"/>
+            <input type="submit" id="user" class="searchButton" name="usearch" value="User"/>
           </form>
           <form action="/posts/search" method="get" id="search_form1">
             <input id="search_input1" class="searchBox" type="text" name="input"/>
-            <input type="submit" id="post" class="searchButton" name="psearch" value="post"/>
+            <input type="submit" id="post" class="searchButton" name="psearch" value="Post"/>
+          </form>
+          <form action="/categories/search" method="get" id="search_form2">
+            <input id="search_input2" class="searchBox" type="text" name="input"/>
+            <input type="submit" id="category" class="searchButton" name="csearch" value="Category"/>
           </form>
         </div>
         <br/>
