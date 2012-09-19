@@ -10,6 +10,22 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    #@posts = Post.find_all_by_content(params[:input])
+    @posts = Post.where("content LIKE '%#{params[:input]}%'")
+    #@posts = Post.where("content LIKE ?","%"+(params[:input])+"%")
+    if @posts.length != 0
+      respond_to do |format|
+        format.html # search.html.erb
+        format.json { render json: @posts }
+      end
+    else
+      flash[:alert] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
+      redirect_to :controller => "posts", :action => "index"
+    end
+  end
+
+
   # GET /posts/1
   # GET /posts/1.json
   def show
@@ -26,7 +42,6 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @user = session[:user_id]
-    #@post.votesnum = 0
     flash[:alert] =  session[:user_id].username
     #session[:post_id]=@post.id
     if @user != nil
@@ -51,7 +66,6 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.User_id = session[:user_id].id
 
-    #@post.votesnum = 0
     respond_to do |format|
       if @post.save
         #session[:post_id] = @post.id
