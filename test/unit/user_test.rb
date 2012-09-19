@@ -21,9 +21,18 @@ class UserTest < Test::Unit::TestCase
     assert true
   end
 
-  def test_if_no_username
+  def  test_presence_of_username
    user = User.new
    assert !user.valid?
+  end
+
+  def  test_uniqueness_of_username
+    user = User.new
+    user.username = users(:pshegde).username
+    user.password = "password"
+    #user.id = (users(:pshegde).id + 1)
+    assert !user.valid?
+    user.errors[:username]= ["has already been taken"]
   end
 
 
