@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :votes
   has_many :comment_votes
+
+  default_scope :order => "updated_at DESC"
   #attr_accessor :original_password
 #  validates_length_of :username, :within => 4..10
   validates_presence_of  :username ,:first_name, :last_name, :email

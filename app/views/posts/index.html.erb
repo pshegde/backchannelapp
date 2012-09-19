@@ -38,7 +38,7 @@
       return false
     end
 %>
-
+    d
 <% @posts.each do |post| %>
 
       <% @commentsForPost = Comment.find_all_by_Post_id(post.id)%>
