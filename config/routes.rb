@@ -5,7 +5,7 @@ Backchannel::Application.routes.draw do
   match "/commentsforpost/new" => "comments#new" ,:via => :get
   match "/users/search" => "users#search"
   match "/posts/search" => "posts#search"
-
+  match "/categories/search" => "categories#search"
   resources :comment_votes
 
   resources :votes
