@@ -7,36 +7,15 @@
     background-color: #f0f0f0 ;
     font: bold smaller sans-serif;
 }
-/* Styles for admin/list */
-#product-list .list-title {
-    color: #244 ;
-    font-weight: bold;
-    font-size: larger;
-}
-#product-list .list-image {
-    width: 60px;
-    height: 70px;
-}
-#product-list .list-actions {
-    font-size: x-small;
-    text-align: right;
-    padding-left: 1em;
-}
-#product-list .list-line-even {
-    background: #e0f8f8 ;
-}
-#product-list .list-line-odd {
-    background: #f8b0f8 ;
-}
 /* Styles for main page */
 #banner {
-    background: #2EB3DE ;
+    background: #01BFFF ;
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid;
     font: small-caps 40px/40px "Times New Roman", serif;
     color: #282 ;
-    text-align: center;
+    left:100px;
 }
 #banner img {
     float: left;
@@ -67,79 +46,11 @@ h1 {
     color: #226 ;
     border-bottom: 3px dotted #77d ;
 }
-/* And entry in the store catalog */
-#store .entry {
-    border-bottom: 1px dotted #77d ;
-}
-#store .title {
-    font-size: 120%;
-    font-family: sans-serif;
-}
-#store .entry img {
-    width: 75px;
-    float: left;
-}
-#store .entry h3 {
-    margin-bottom: 2px;
-    color: #227 ;
-}
-#store .entry p {
-    margin-top: 0px;
-    margin-bottom: 0.8em;
-}
-#store .entry .price-line {
-}
-#store .entry .add-to-cart {
-    position: relative;
-}
-#store .entry .price {
-    color: #44a;
-    font-weight: bold;
-    margin-right: 2em;
-    float: left;
-}
-/* Styles for the cart in the main page and the sidebar */
-.cart-title {
-    font: 120% bold;
-}
-.item-price, .total-line {
-    text-align: right;
-}
 .total-line .total-cell {
     font-weight: bold;
     border-top: 1px solid #595 ;
 }
-/* Styles for the cart in the sidebar */
 
-#cart, #cart table {
-    font-size: smaller;
-    color: white;
-}
-#cart table {
-    border-top: 1px dotted #595 ;
-    border-bottom: 1px dotted #595 ;
-    margin-bottom: 10px;
-}
-/* Styles for order form */
-.depot-form fieldset {
-    background: #efe;
-}
-.depot-form legend {
-    color: #dfd ;
-    background: #141 ;
-    font-style: sans-serif;
-    padding: 0.2em 1em;
-}
-.depot-form label {
-    width: 5em;
-    float: left;
-    text-align: right;
-    margin-right: 0.5em;
-    display: block;
-}
-.depot-form .submit {
-    margin-left: 5.5em;
-}
 /* The error box */
 .fieldWithErrors {
     padding: 2px;

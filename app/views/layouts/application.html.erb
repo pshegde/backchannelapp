@@ -8,34 +8,30 @@
 </head>
 <body>
       <div id="banner">
-              <%= image_tag("rails.png")     %>
-              <h1>BackChannel App</h1>
-      </div>
-      <div id="search">
-        <div>
-          <span> Search by user or post:</span>  <br/>  <br/>
-          <form action="/users/search" method="get" id="search_form">
-            <input id="search_input" class="searchBox" type="text" name="input"/>
-            <input type="submit" id="user" class="searchButton" name="usearch" value="user"/>
-          </form>
-          <form action="/posts/search" method="get" id="search_form1">
-            <input id="search_input1" class="searchBox" type="text" name="input"/>
-            <input type="submit" id="post" class="searchButton" name="psearch" value="post"/>
-          </form>
-        </div>
-        <br/>
-      </div>
-      <br/><br/>
+        <span>
+              <%= image_tag("rails.png")%>
+              <h1>Backchannel App</h1>
+        </span>
 
+        <span id="search" style='font-size:20px;position: absolute;right: 20px;top:30px; padding: 10px;border:2px solid #79B7E7;border-color: #000000;'>
+
+              Search by user or post:  <br/>
+            <form action="/users/search" method="get" id="search_form">
+              <input id="search_input" class="searchBox" type="text" name="input"/>
+              <input type="submit" id="user" class="searchButton" name="usearch" value="user"/>
+            </form>
+            <form action="/posts/search" method="get" id="search_form1">
+              <input id="search_input1" class="searchBox" type="text" name="input"/>
+              <input type="submit" id="post" class="searchButton" name="psearch" value="post"/>
+            </form>
+         </span>
+      </div>
       <div id="columns">
       <div id="side">
            <a href="/posts">Home</a>  <br>
-        <% if session[:user_id] %>
-            <div  style='font-color:#CC0000;font-weight:bold;'>
-              <a href="/logout">Logout</a>
-            </div>
-        <% end %>
-        <br>
+           <% if session[:user_id] %>
+                <a href="/logout">Logout</a>
+           <% end %>
       </div>
       <div id="main">
             <%= yield :layout%>
