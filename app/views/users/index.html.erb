@@ -34,4 +34,8 @@
 <br />
 
 <%= link_to 'admin home page', :controller => 'admins', :action => 'index' %>
+<%else%>
+    <h2>Access Denied!</h2> <br>
+    <h2><%= link_to "Login ", :controller => 'logins', :action=>'new' %></h2>
+
 <%end%>

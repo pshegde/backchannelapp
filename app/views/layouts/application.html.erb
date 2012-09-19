@@ -17,17 +17,11 @@
 
               Search by user/post/category:  <br/>
             <form action="/users/search" method="get" id="search_form">
-              <input id="search_input" class="searchBox" type="text" name="input"/>
-              <input type="submit" id="user" class="searchButton" name="usearch" value="user"/>
+              <input id="search_input" class="myinputs" type="text" name="input"/>
+              <input type="submit" id="user" class="styled-button" name="usearch" value="user"/>
+              <input type="submit" id="post" class="styled-button" name="psearch" value="post" formaction="/posts/search"/>
+              <input type="submit" id="category" class="styled-button" name="csearch" value="Category" formaction="/categories/search"/>
             </form>
-            <form action="/posts/search" method="get" id="search_form1">
-              <input id="search_input1" class="searchBox" type="text" name="input"/>
-              <input type="submit" id="post" class="searchButton" name="psearch" value="post"/>
-            </form>
-             <form action="/categories/search" method="get" id="search_form2">
-               <input id="search_input2" class="searchBox" type="text" name="input"/>
-               <input type="submit" id="category" class="searchButton" name="csearch" value="Category"/>
-             </form>
          </span>
       </div>
       <div id="columns">

@@ -58,6 +58,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        #update the updated date from comment table in post table
+        @post = Post.find(@comment.Post_id)
+        @post.update_attributes(:updated_at => @comment.updated_at)
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
@@ -74,6 +77,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
+        #update the updated date from comment table in post table
+        @post = Post.find(@comment.Post_id)
+        @post.update_attributes(:updated_at => @comment.updated_at)
         format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
@@ -118,6 +124,9 @@ class CommentsController < ApplicationController
 
       #2. update numvotes in Post
       @comment.update_attributes(:num_votes => Integer(@comment.num_votes) +1)
+      #update the updated date from comment table in post table
+      @post = Post.find(@comment.Post_id)
+      @post.update_attributes(:updated_at => @comment.updated_at)
       flash[:alert] = "Your vote for the comment was registered successfully."
     end
     redirect_to :controller => "posts", :action => "index"
