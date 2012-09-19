@@ -17,17 +17,17 @@ class UsersController < ApplicationController
     if @user != nil
       @posts = Post.find_all_by_User_id(@user.id)
       if @posts.length != 0
-        flash[:alert] = "Posts found are listed below:"
+        flash[:notice] = "Posts found are listed below:"
             respond_to do |format|
           format.html #search.html.erb
           format.json { render json: @posts }
         end
       else
-        flash[:alert] = "No posts found for input: "+params[:input].to_s+"! Please try again."
+        flash[:notice] = "No posts found for input: "+params[:input].to_s+"! Please try again."
         redirect_to :controller => "posts", :action => "index"
       end
     else
-      flash[:alert] = "No user found for search input: "+params[:input].to_s
+      flash[:notice] = "No user found for search input: "+params[:input].to_s
       redirect_to :controller => "posts", :action => "index"
     end
 

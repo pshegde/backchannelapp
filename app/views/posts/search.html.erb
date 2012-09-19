@@ -3,9 +3,9 @@
 <%else%>
     <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
 <%end%>  <br>
-<% if flash[:alert] %>
+<% if flash[:notice] %>
     <div  style='font-color:#CC0000;font-weight:bold;'>
-      <%= flash[:alert] %>
+      <%= flash[:notice] %>
     </div>
 <% end %>
 
