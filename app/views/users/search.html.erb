@@ -1,19 +1,13 @@
-<% if session[:user_id] == nil %>
-    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
-    <br>
-<%else%>
-    <%= link_to 'Post a Question', new_post_path %>
-<% end %>
-<br>
+
 <% if flash[:alert] %>
-    <div  style='font-color:#CC0000;font-weight:bold;'>
+    <div  style='font-color:#CC0000;font-weight:bold; font-size: 14px;'>
       <%= flash[:alert] %>
     </div>
 <% end %>
 
 <br>
 
-  <h4>Questions</h4>
+  <!--<h4>Questions</h4>    -->
   <table style="width: 100%">
 
     <% @posts.each do |post| %>
@@ -23,7 +17,7 @@
             <p class="content"> <b>Content</b> <%= post.content %>    </p>
             <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
             </p>
-            <% if session[:admin] !=false || session[:user_id].user_name == post.user.user_name %>
+            <% if session[:admin] !=false || session[:user_id].username == post.user.username %>
 
                 <%= link_to 'Show', post %>
                 <%= link_to 'Edit', edit_post_path(post) %>
@@ -36,3 +30,12 @@
   </table>
 
   <br/>
+    <% if session[:user_id] == nil %>
+        <h2>Not logged in? <%= link_to "Login", :controller => 'logins', :action=>'new' %></h2>
+        <br>
+
+<% else%>
+  <h3><%= link_to 'Post a Question', new_post_path %>     </h3>
+
+    <br>
+<%end%>

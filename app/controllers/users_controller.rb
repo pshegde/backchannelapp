@@ -62,6 +62,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
+    @user_check =User.where("username LIKE '%#{params[:user]}%'")
+    if !@user_check.nil?
+      flash[:alert] = "Sorry Username already taken"
+      redirect_to(:controller=>:logins,:action=>:new) and return
+    end
     respond_to do |format|
       if @user.save
         if session[:user_id].nil?
