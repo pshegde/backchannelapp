@@ -64,7 +64,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         if session[:user_id].nil?
-          session[:user_id] = @user.id
+          session[:user_id] = @user
+          session[:isadmin] = false
           flash[:alert] = "You have successfully logged in"
           #redirect_to :controller => "posts", :action => "index"
         end
