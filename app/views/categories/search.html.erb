@@ -4,9 +4,9 @@
     <%else%>
     <%= link_to 'Post a Question', new_post_path %>
 <% end %>  <br>
-<% if flash[:alert] %>
+<% if flash[:notice] %>
     <div  style='font-color:#CC0000;font-weight:bold;'>
-      <%= flash[:alert] %>
+      <%= flash[:notice] %>
     </div>
 <% end %>
 

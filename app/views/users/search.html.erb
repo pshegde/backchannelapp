@@ -1,7 +1,7 @@
 
-<% if flash[:alert] %>
+<% if flash[:notice] %>
     <div  style='font-color:#CC0000;font-weight:bold; font-size: 14px;'>
-      <%= flash[:alert] %>
+      <%= flash[:notice] %>
     </div>
 <% end %>
 
@@ -13,16 +13,15 @@
     <% @posts.each do |post| %>
         <tr style="background-color: #7fffd4;">
           <td>
-            <p class="title"> <b>Title</b> <%= post.title %>    </p>
+            <!--<p class="title"> <b>Title</b> <%= post.title %>    </p>
             <p class="content"> <b>Content</b> <%= post.content %>    </p>
+            <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>   -->
+
+            <p class="title" > <b> <%= post.title %> </b>   </p>
+            <p class="content"> <%= post.content %>    </p>
             <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
             </p>
-            <% if session[:admin] !=false || session[:user_id].username == post.user.username %>
 
-                <%= link_to 'Show', post %>
-                <%= link_to 'Edit', edit_post_path(post) %>
-                <%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %>
-            <% end %>
           </td>
         </tr>
         <hr/>
@@ -35,7 +34,8 @@
         <br>
 
 <% else%>
-  <h3><%= link_to 'Post a Question', new_post_path %>     </h3>
+  <h3><%= link_to 'Post a Question', new_post_path %>
+    &nbsp; &nbsp;
+    <%= link_to 'See all posts', :controller => "posts", :action => "index" %>    </h3>
 
-    <br>
 <%end%>
