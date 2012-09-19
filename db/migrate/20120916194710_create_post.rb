@@ -1,10 +1,13 @@
 class CreatePost < ActiveRecord::Migration
   def up
     create_table :posts do |t|
-      t.string :title
-      t.string :content
+      t.text :title
+      t.text :content
+      t.references :User
+      t.references :Category
       t.timestamps
     end
+
   end
 
   def down

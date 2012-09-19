@@ -1,8 +1,9 @@
 class CreateVotes < ActiveRecord::Migration
   def change
     create_table :votes do |t|
-      t.integer  "numVotes",   :default => 0
+      t.references :User
+      t.references :Post
       t.timestamps
-    end
+      end
   end
 end

@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
   #:order => "created_at"
-
+  validates_presence_of :title, :content
   def self.destroyLinked(post)
     post.destroy
   end
