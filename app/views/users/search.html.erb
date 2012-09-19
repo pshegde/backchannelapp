@@ -1,5 +1,5 @@
 <% if session[:user_id] == nil %>
-    <%= link_to 'login', :controller => "logins", :action => "new" %>
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
     <br>
 <%else%>
     <%= link_to 'Post a Question', new_post_path %>
