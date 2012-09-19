@@ -3,8 +3,12 @@
     <br>
     <%else%>
     <%= link_to 'Post a Question', new_post_path %>
+<% end %>  <br>
+<% if flash[:alert] %>
+    <div  style='font-color:#CC0000;font-weight:bold;'>
+      <%= flash[:alert] %>
+    </div>
 <% end %>
-
 
 <br>
 
@@ -12,12 +16,12 @@
 <table style="width: 100%">
 
   <% @posts.each do |post| %>
-      <tr>
+      <tr style="background-color: #7fffd4;">
         <td>
-          <p class="title"> <b>Title</b> <%= post.title %>
-          <p class="content"> <b>Content</b> <%= post.content %>
+          <p class="title"> <b>Title</b> <%= post.title %>  </p>
+          <p class="content"> <b>Content</b> <%= post.content %>    </p>
           <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
-          </p>          </p>             </p>
+          </p>
           <% if session[:admin] !=false || session[:user_id].user_name == post.user.user_name %>
 
               <%= link_to 'Show', post %>
@@ -25,7 +29,7 @@
               <%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %>
           <% end %>
         </td>
-      </tr>
+      </tr>   <hr/>
   <% end %>
 </table>
 

@@ -2,8 +2,12 @@
     <%= link_to 'Post a Question', new_post_path %>
 <%else%>
     <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
-<%end%>
-
+<%end%>  <br>
+<% if flash[:alert] %>
+    <div  style='font-color:#CC0000;font-weight:bold;'>
+      <%= flash[:alert] %>
+    </div>
+<% end %>
 
 
 <br xmlns="http://www.w3.org/1999/html">
@@ -12,7 +16,7 @@
 <table style="width: 100%">
 
   <% @posts.each do |post| %>
-      <tr>
+      <tr style="background-color: #7fffd4;">
         <td>
           <p class="title"> <b>Title</b> <%= post.title %>
           <p class="content"> <b>Content</b> <%= post.content %>
@@ -25,7 +29,7 @@
               <%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %>
           <% end %>
         </td>
-      </tr>
+      </tr>  <hr/>
   <% end %>
 </table>
 

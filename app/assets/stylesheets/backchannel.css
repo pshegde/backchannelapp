@@ -84,3 +84,36 @@ h1 {
     font-size: 12px;
     list-style: square;
 }
+
+button, input, select, textarea { font-family: sans-serif; color: #222; }
+
+a {text-decoration:underline; color: #2E6E9E;}
+a:visited { color: #551a8b; }
+a:hover { color: #1D5987; outline: 0; }
+a:focus { outline: thin dotted; }
+a:link { color: #0000FF; }
+
+/*Reference:http://graemeboy.com/css-buttons/    */
+.styled-button {
+    -webkit-box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
+    -moz-box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
+    box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
+    border-bottom-color:#333;
+    border:1px solid #61c4ea;
+    background-color:#7cceee;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    color:#222266;
+    font-family:'Verdana',Arial,sans-serif;
+    font-size:14px;
+    text-shadow:#b2e2f5 0 1px 0;
+    padding:5px
+}
+
+.myinputs {
+    border: 1px solid #222266;
+    background: #ffc;
+}
+
+

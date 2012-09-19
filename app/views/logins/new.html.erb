@@ -12,18 +12,18 @@
             <label for="username">
               Username:
             </label>
-            <%= text_field_tag :username, params[:username] %>
+            <%= text_field_tag :username, params[:username],:class=>"myinputs" %>
           </p>
           <p>
             <label for="original_password">
               Password:
             </label>
-            <%= password_field_tag :original_password, params[:original_password] %>
+            <%= password_field_tag :original_password, params[:original_password],:class=>"myinputs" %>
           </p>
 
-
+      <br>
       <div class="actions">
-            <%= submit_tag "Login" %>
+            <%= submit_tag "Login",:class=>"styled-button"%>
             &nbsp;&nbsp;&nbsp;New user?<%= link_to "Sign up" ,:controller=>'users',:action=>'new' %>
       </div>
 

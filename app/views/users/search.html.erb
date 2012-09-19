@@ -11,7 +11,7 @@
     </div>
 <% end %>
 
-
+<br>
 
   <h4>Questions</h4>
   <table style="width: 100%">
@@ -19,10 +19,10 @@
     <% @posts.each do |post| %>
         <tr style="background-color: #7fffd4;">
           <td>
-            <p class="title"> <b>Title</b> <%= post.title %>
-            <p class="content"> <b>Content</b> <%= post.content %>
+            <p class="title"> <b>Title</b> <%= post.title %>    </p>
+            <p class="content"> <b>Content</b> <%= post.content %>    </p>
             <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
-            </p>          </p>             </p>
+            </p>
             <% if session[:admin] !=false || session[:user_id].user_name == post.user.user_name %>
 
                 <%= link_to 'Show', post %>
@@ -35,6 +35,4 @@
     <% end %>
   </table>
 
-  </div>
-  </div>
   <br/>

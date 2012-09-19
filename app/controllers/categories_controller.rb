@@ -80,4 +80,8 @@ class CategoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def search
+    redirect_to :controller => "posts", :action => "index"
+  end
 end
