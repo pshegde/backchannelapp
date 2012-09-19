@@ -4,8 +4,10 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments
   has_many :votes
+  has_one :category
   default_scope :order => "updated_at DESC"
   validates_presence_of :title, :content
+
   def self.destroyLinked(post)
     post.destroy
   end
