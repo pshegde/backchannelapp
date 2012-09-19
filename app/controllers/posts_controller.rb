@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   def search
     #@posts = Post.find_all_by_content(params[:input])
-    @posts = Post.where("content LIKE '%#{params[:input]}%'")
+    @posts = Post.where("UPPER(content) LIKE UPPER('%#{params[:input]}%')")
     #@posts = Post.where("content LIKE ?","%"+(params[:input])+"%")
     if @posts.length != 0
       flash[:notice] = "Posts found are listed below:"
