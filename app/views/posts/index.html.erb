@@ -45,10 +45,12 @@
 
           <div style="background-color: #00bfff;font-size:15px;">
             <b><%= post.title %>  </b>
-
+            <% if session[:user_id].id ==post.User_id %>
+            &nbsp;&nbsp;&nbsp;<td><%= link_to 'Edit', edit_post_path(post) %></td>
+                <%end%>
             <% if session[:isadmin] ==true or session[:user_id].id ==post.User_id %>
-                &nbsp;&nbsp;&nbsp;<td><%= link_to 'Edit', edit_post_path(post) %></td>
-                &nbsp;&nbsp;&nbsp;<td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+                &nbsp;&nbsp;&nbsp;<td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
             <%end%>
             &nbsp;&nbsp;&nbsp;<a href=<%="/commentsforpost/new?post_id_passed=" + post.id.to_s%>>Comment</a>
             &nbsp;&nbsp;&nbsp;<a href=<%="/voteforpost/incrementVote?post_id_for_vote=" + post.id.to_s%>>Vote</a>
@@ -70,9 +72,12 @@
            <% @commentsForPost.each do |comment| %>
               <%=comment.content%>
               &nbsp;&nbsp;&nbsp;Posted by:<%=User.find(comment.User_id).username%>
+              <% if session[:user_id].id ==comment.User_id %>
+                   &nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_comment_path(comment) %>
+                  <%end%>
               <% if session[:isadmin] ==true or session[:user_id].id ==comment.User_id %>
-                  &nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_comment_path(comment) %>
-                  &nbsp;&nbsp;&nbsp;<%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+                  &nbsp;&nbsp;&nbsp;<%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
               <%end%>
 
               &nbsp;&nbsp;&nbsp;<a href=<%="/voteforcomment/incrementVote?comment_id_for_vote=" + comment.id.to_s%>>Vote</a>
@@ -90,10 +95,17 @@
 <% end %>
 <br />
 
-
-
-<%= link_to 'Post a Question', :controller => "posts", :action => "new" %>
 <%else%>
     <h2>No posts found.</h2> <br>
-    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+ <%end%>
+<%= link_to 'Post a Question', :controller => "posts", :action => "new" %>
+    &nbsp; &nbsp;
+    <% if session[:isadmin] == true %>
+        <%= link_to 'Admin Home Page', :controller => "admins", :action => "index" %>
+
+
+    <%if session[:user_id].nil?  %>
+        <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+     <%end%>
 <%end%>
+

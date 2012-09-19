@@ -12,7 +12,7 @@
 
 <br xmlns="http://www.w3.org/1999/html">
 
-<h4>Questions</h4>
+<!--<h4>Questions</h4> -->
 <table style="width: 100%">
 
   <% @posts.each do |post| %>
@@ -22,7 +22,7 @@
           <p class="content"> <b>Content</b> <%= post.content %>
           <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
           </p>          </p>             </p>
-          <% if session[:admin] !=false || session[:user_id].user_name == post.user.user_name %>
+          <% if session[:isadmin] !=false || session[:user_id].username == post.user.username %>
 
               <%= link_to 'Show', post %>
               <%= link_to 'Edit', edit_post_path(post) %>

@@ -13,16 +13,15 @@
     <% @posts.each do |post| %>
         <tr style="background-color: #7fffd4;">
           <td>
-            <p class="title"> <b>Title</b> <%= post.title %>    </p>
+            <!--<p class="title"> <b>Title</b> <%= post.title %>    </p>
             <p class="content"> <b>Content</b> <%= post.content %>    </p>
+            <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>   -->
+
+            <p class="title" > <b> <%= post.title %> </b>   </p>
+            <p class="content"> <%= post.content %>    </p>
             <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
             </p>
-            <% if session[:admin] !=false || session[:user_id].username == post.user.username %>
 
-                <%= link_to 'Show', post %>
-                <%= link_to 'Edit', edit_post_path(post) %>
-                <%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %>
-            <% end %>
           </td>
         </tr>
         <hr/>
