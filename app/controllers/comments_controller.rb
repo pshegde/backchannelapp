@@ -101,11 +101,11 @@ class CommentsController < ApplicationController
     if checkIfVotingAgain(params[:comment_id_for_vote],session[:user_id].id) == false
       firstTimeVote = true
     else
-      flash[:alert] = "Sorry. You cannot like a comment more than once."
+      flash[:alert] = "Sorry. You cannot vote for a comment more than once."
     end
 
     if session[:user_id].id == @comment.User_id
-      flash[:alert] = "Sorry. You cannot like on your own comment."
+      flash[:alert] = "Sorry. You cannot vote on your own comment."
     end
 
     if session[:user_id].id != @comment.User_id  and firstTimeVote == true
@@ -120,7 +120,7 @@ class CommentsController < ApplicationController
       @comment.update_attributes(:num_votes => Integer(@comment.num_votes) +1)
       flash[:alert] = "Your vote for the comment was registered successfully."
     end
-    redirect_to :controller => "comments", :action => "index"
+    redirect_to :controller => "posts", :action => "index"
   end
 
   def checkIfVotingAgain(comment_id,loggedin_user_id)
