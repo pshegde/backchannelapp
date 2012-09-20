@@ -1,0 +1,14 @@
+<% if session[:user_id] != nil %>
+    <h1>Users who voted on comment are:</h1>
+
+    <% @userVotedOnComment.each do |user| %>
+        <div style="background-color: #bbffbb;font-size:15px;">
+          <%= user.username %>
+        </div>
+        <hr/>
+    <%end%>
+
+    <%= link_to "Back to Posts page" ,:controller=>'posts',:action=>'index' %>
+<%else%>
+    <h2>Not logged in? <%= link_to "Login", :controller => 'logins', :action=>'new' %></h2>
+<%end%>

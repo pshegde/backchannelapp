@@ -119,7 +119,7 @@ class CommentsController < ApplicationController
       @CommentVote = CommentVote.new
       @CommentVote.Comment_id= params[:comment_id_for_vote]
       @CommentVote.User_id= session[:user_id].id   #user who voted
-
+      @CommentVote.Post_id = Comment.find(params[:comment_id_for_vote]).Post_id
       @CommentVote.save
 
       #2. update numvotes in Post

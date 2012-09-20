@@ -12,6 +12,8 @@
     </span></h1>
       </div>
 
+
+
 <%  def checkDisplayComment(comment_id,loggedin_user_id)
       @votes = CommentVote.all
 
@@ -55,15 +57,23 @@
             &nbsp;&nbsp;&nbsp;<a href=<%="/commentsforpost/new?post_id_passed=" + post.id.to_s%>>Comment</a>
             &nbsp;&nbsp;&nbsp;<a href=<%="/voteforpost/incrementVote?post_id_for_vote=" + post.id.to_s%>>Vote</a>
             <% if checkDisplayPost(post.id,session[:user_id].id) == true %>
-            &nbsp;&nbsp;&nbsp; You and <%= Integer(post.num_votes) -1  %>  other people voted.
-                <%else %>
-            &nbsp;&nbsp;&nbsp;  <%= Integer(post.num_votes)  %>  people voted.
+                <% if Integer(post.num_votes) -1 == 0 %>
+                    &nbsp;&nbsp;&nbsp; You and <%= Integer(post.num_votes) -1  %>  other people voted.
+                <%else%>
+                    &nbsp;&nbsp;&nbsp; You and <a href=<%='/whovotedpost?post_id_voted=' + post.id.to_s %>><%= Integer(post.num_votes) -1  %></a>  other people voted.
+                <% end %>
+            <%else %>
+                <% if Integer(post.num_votes) == 0 %>
+                    &nbsp;&nbsp;&nbsp;  <%= Integer(post.num_votes)  %>  people voted.
+                <% else  %>
+                    &nbsp;&nbsp;&nbsp;  <a href=<%='/whovotedpost?post_id_voted=' + post.id.to_s %>><%= Integer(post.num_votes)  %></a>  people voted.
+                <%end%>
              <%end%>
           </div>
           <div style="background-color: #bbffbb;">
             <%= post.content %>
-          </div>
-          <div>
+              <br>
+
             <b>Category:</b><%= Category.find(post.Category_id).name %>
             &nbsp;&nbsp;&nbsp;<b>Author:</b><%= User.find(post.User_id).username %>
           </div>
@@ -82,9 +92,17 @@
 
               &nbsp;&nbsp;&nbsp;<a href=<%="/voteforcomment/incrementVote?comment_id_for_vote=" + comment.id.to_s%>>Vote</a>
               <% if checkDisplayComment(comment.id,session[:user_id].id) == true %>
-                  &nbsp;&nbsp;&nbsp; You and <%= Integer(comment.num_votes) -1  %>  other people voted.
+                  <% if Integer(comment.num_votes) -1 == 0 %>
+                    &nbsp;&nbsp;&nbsp; You and <%= Integer(comment.num_votes) -1  %> other people voted.
+                  <%else%>
+                    &nbsp;&nbsp;&nbsp; You and  <a href=<%='/whovotedcomment?post_id_voted=' + post.id.to_s%>><%= Integer(comment.num_votes) -1  %></a> other people voted.
+                  <%end%>
               <%else %>
-                  &nbsp;&nbsp;&nbsp;  <%= Integer(comment.num_votes)  %>  people voted.
+                  <% if Integer(comment.num_votes) == 0 %>
+                    &nbsp;&nbsp;&nbsp; <%= Integer(comment.num_votes)  %>  people voted.
+                  <%else%>
+                      &nbsp;&nbsp;&nbsp;  <a href=<%='/whovotedcomment?post_id_voted=' + post.id.to_s%>><%= Integer(comment.num_votes)  %></a>  people voted.
+                  <%end%>
               <%end%>
             <br>
            <%end%>
@@ -99,13 +117,12 @@
 <%= link_to 'Post a Question', :controller => "posts", :action => "new" %>
 
         <% if session[:isadmin] == true %>
-        <%= link_to 'Admin Home Page', :controller => "admins", :action => "index" %>
-         <%end%>
-    <%else%>
-        <h2>No posts found.</h2> <br>
-    <%end%>
+            <%= link_to 'Admin Home Page', :controller => "admins", :action => "index" %>
+        <%end%>
+
+<%end%>
+
     <%if session[:user_id].nil?  %>
         <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
-     <%end%>
-
+    <%end%>
 
