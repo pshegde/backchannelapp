@@ -109,7 +109,26 @@ class UsersController < ApplicationController
     end
   end
 
+ def whovotedpost
+    @peopleVoted = Vote.find_all_by_Post_id(params[:post_id_voted])
+    @userVoted = []
+    @peopleVoted.each do |vote|
+      if vote.User_id != session[:user_id].id
+        @userVoted << User.find(vote.User_id)
+      end
+    end
+    #format.html { render action: "whovotedpost" }
+ end
 
+  def whovotedcomment
+    @peopleVoted = CommentVote.find_all_by_Post_id(params[:post_id_voted])
+    @userVotedOnComment = []
+    @peopleVoted.each do |vote|
+      if vote.User_id != session[:user_id].id
+        @userVotedOnComment << User.find(vote.User_id)
+      end
+    end
+  end
 
   end
 
