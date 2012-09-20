@@ -1,14 +1,14 @@
 <h1>Listing posts</h1>
-<table>
+<table border=1 style="background-color: #7fffd4;">
 
   <%if @users%>
       <tr>
         <th>User</th>
         <th>Posts</th>
         <th>Comments</th>
-        <th>Total Votes received Posts|</th>
-        <th>Total Votes received Comments|</th>
-        <th>Total Votes|</th>
+        <th>Total Votes received Posts</th>
+        <th>Total Votes received Comments</th>
+        <th>Total Votes</th>
       </tr>
       <% @numPosts=0;@numComments=0;@numVotes=0;%>
       <% @users.each do |user| %>
@@ -46,5 +46,5 @@
       <%= flash[:alert] %>
     </div>
 <% end %>
-
+<br>
 <%= link_to 'Admin Home Page ', :controller => 'admins', :actions =>'index' %>
