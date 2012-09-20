@@ -1,7 +1,12 @@
 require 'test_helper'
+class CategoryTest < Test::Unit::TestCase
 
-class CategoryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
+  def test_category_empty
+    cost = Category.new
+    assert !cost.valid?
+  end
 end

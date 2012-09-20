@@ -1,7 +1,12 @@
 require 'test_helper'
+class CommentTest < Test::Unit::TestCase
 
-class CommentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
+  def test_comment_empty
+    cost = Comment.new
+    assert !cost.valid?
+  end
 end
