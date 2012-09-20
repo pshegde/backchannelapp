@@ -32,7 +32,7 @@
       <%= f.label :password %><br />
       <%= f.password_field :original_password %>
     </div>
-    <% if session[:is_admin]==true %>
+    <% if session[:isadmin]==true %>
     <div class="field">
       <%= f.label :admin %><br />
       <%= f.check_box :admin %>
