@@ -14,14 +14,14 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def search
     #@posts = Post.find_all_by_content(params[:input])
-    @categories = Post.where(Category.find_all_by_name(params[:input]))
+    @posts = Post.find_by_sql("select * from posts where Category_id in (select id from categories where upper(name) like upper('%#{params[:input]}%'))")
     #@posts = Post.where("content LIKE '%#{params[:input]}%'")
     #Category.joins(:posts)
     #@categories = Category.find_all_by_name(params[:input])
     #@categories = Category.where("name LIKE '%#{params[:input]}%'")
 
 
-    @posts = Category.select("id").where(name: '(params[:input])')
+    #@posts = Category.select("id").where(name: '(params[:input])')
     #@posts= Post.find_all_by_Category_id(LIKE (Category.select("Category_id").where(Category.find_all_by_name(params[:input]))))
     #@categories = Category.find(params[:input])
     #@cat_id = Post.where ("categories: LIKE ")
@@ -30,10 +30,10 @@ class CategoriesController < ApplicationController
     if @posts.length != 0
       respond_to do |format|
         format.html # search.html.erb
-        format.json { render json: @posts }
+        format.json { render json: @posts_search }
       end
 
-    #else
+    else
       flash[:alert] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
       redirect_to :controller => "posts", :action => "index"
     end
