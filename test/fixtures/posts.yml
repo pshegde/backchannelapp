@@ -3,11 +3,18 @@
 one:
   title: MyString
   content: MyString
-  category: MyString
-  creation_time: 2012-09-16 01:32:18
+  User_id: 1
+  Category_id: 1
+  num_votes: 2
+  created_at: <%= Time.now.to_s(:db) %>
+  updated_at: <%= Time.now.to_s(:db) %>
+
 
 two:
-  title: MyString
-  content: MyString
-  category: MyString
-  creation_time: 2012-09-16 01:32:18
+  title: MyString1
+  content: MyString1
+  User_id: 2
+  Category_id: 2
+  num_votes: 2
+  created_at: <%= Time.now.to_s(:db) %>
+  updated_at: <%= Time.now.to_s(:db) %>

@@ -2,6 +2,18 @@
 
 one:
   content: MyString
+  Post_id: 1
+  User_id: 1
+  num_votes: 1
+  created_at: <%= Time.now.to_s(:db) %>
+  updated_at: <%= Time.now.to_s(:db) %>
+
 
 two:
-  content: MyString
+  content: MyString2
+  Post_id: 2
+  User_id: 2
+  num_votes: 2
+  created_at: <%= Time.now.to_s(:db) %>
+  updated_at: <%= Time.now.to_s(:db) %>
+

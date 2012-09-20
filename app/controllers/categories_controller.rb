@@ -14,21 +14,30 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def search
     #@posts = Post.find_all_by_content(params[:input])
-    #@categories = Category.find_all_by_name(params[:input])
+    @categories = Post.where(Category.find_all_by_name(params[:input]))
     #@posts = Post.where("content LIKE '%#{params[:input]}%'")
-    @cat_id = Category.find_all_by_name(param[:input])
-    @posts = Post.where("Category_id LIKE @cat_id.id")#, :cat_id => '%#{ Category.fi (param[:input])}%')
-                                                      #@posts = Post.where("content LIKE ?","%"+(params[:input])+"%")
+    #Category.joins(:posts)
+    #@categories = Category.find_all_by_name(params[:input])
+    #@categories = Category.where("name LIKE '%#{params[:input]}%'")
+
+
+    @posts = Category.select("id").where(name: '(params[:input])')
+    #@posts= Post.find_all_by_Category_id(LIKE (Category.select("Category_id").where(Category.find_all_by_name(params[:input]))))
+    #@categories = Category.find(params[:input])
+    #@cat_id = Post.where ("categories: LIKE ")
+    #@posts = Post.where("Category_id LIKE @cat_id.id")#, :cat_id => '%#{ Category.fi (param[:input])}%')
+    #@posts = Post.where("content LIKE ?","%"+(params[:input])+"%")
     if @posts.length != 0
-      flash[:notice] = "Posts found are listed below:"
       respond_to do |format|
         format.html # search.html.erb
         format.json { render json: @posts }
       end
-    else
-      flash[:notice] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
+
+    #else
+      flash[:alert] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
       redirect_to :controller => "posts", :action => "index"
     end
+
   end
 
   def show
@@ -100,7 +109,4 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def search
-    redirect_to :controller => "posts", :action => "index"
-  end
 end

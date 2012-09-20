@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  attr_accessible   :username, :first_name, :last_name, :email, :original_password, :salt, :admin
+  attr_accessible   :username, :first_name, :last_name, :email, :original_password, :salt, :admin, :password
   has_many :posts
   has_many :comments
   has_many :votes
