@@ -3,7 +3,7 @@
     &nbsp; &nbsp;
     <%= link_to 'See all posts', :controller => "posts", :action => "index" %>
 <%else%>
-    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+    <h2>Not logged in? <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
 <%end%>  <br>
 <% if flash[:notice] %>
     <div  style='font-color:#CC0000;font-weight:bold;'>
@@ -20,18 +20,13 @@
   <% @posts.each do |post| %>
       <tr style="background-color: #7fffd4;">
         <td>
-          <p class="title"> <b>Title</b> <%= post.title %>
-          <p class="content"> <b>Content</b> <%= post.content %>
-          <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
-          </p>          </p>             </p>
-          <% if session[:isadmin] !=false || session[:user_id].username == post.user.username %>
+          <p class="title"> <b>Title</b> <%= post.title %>         </p>
+          <p class="content"> <b>Content</b> <%= post.content %>       </p>
+          <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %></p>
 
-              <%= link_to 'Show', post %>
-              <%= link_to 'Edit', edit_post_path(post) %>
-              <%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %>
-          <% end %>
+
         </td>
-      </tr>  <hr/>
+      </tr>
   <% end %>
 </table>
 
