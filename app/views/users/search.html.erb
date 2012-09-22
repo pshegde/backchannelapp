@@ -15,7 +15,8 @@
         <td>
           <p class="title" > <b> <%= post.title %> </b>   </p>
           <p class="content"> <%= post.content %>    </p>
-          <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
+          <p>
+            <span style="background-color: #dc143c; color: #ffffff;">#<%= Category.find(post.Category_id).name %> </span>
           </p>
 
         </td>

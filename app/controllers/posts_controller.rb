@@ -11,14 +11,17 @@ class PostsController < ApplicationController
   end
 
   def search
-    #@posts = Post.find_all_by_content(params[:input])
-    @posts = Post.where("UPPER(content) LIKE UPPER('%#{params[:input]}%')")
-    #@posts = Post.where("content LIKE ?","%"+(params[:input])+"%")
+   @posts = Post.where("UPPER(content) LIKE UPPER('%#{params[:input]}%')")
     if @posts.length != 0
-      flash[:notice] = "Posts found are listed below:"
-      respond_to do |format|
-        format.html # search.html.erb
-        format.json { render json: @posts }
+      if session[:user_id] == nil
+        flash[:notice] = "Posts found are listed below:"
+        respond_to do |format|
+          format.html # search.html.erb
+          format.json { render json: @posts }
+        end
+      else
+          flash[:notice] = "Posts found are listed below:"
+          redirect_to :controller => "posts", :action => "index"
       end
     else
       flash[:notice] = "No posts found for input: "+params[:input].to_s+" ! Please try again."

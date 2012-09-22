@@ -12,15 +12,20 @@ class UsersController < ApplicationController
   end
 
   def search
-
     @user = User.find_by_username(params[:input])
     if @user != nil
       @posts = Post.find_all_by_User_id(@user.id)
       if @posts.length != 0
-        flash[:notice] = "Posts found are listed below:"
-            respond_to do |format|
-          format.html #search.html.erb
-          format.json { render json: @posts }
+        if session[:user_id] == nil
+          #search.html.erb
+          flash[:notice] = "Posts found are listed below:"
+          respond_to do |format|
+            format.html
+            format.json { render json: @posts }
+          end
+        else
+          flash[:notice] = "Posts found are listed below:"
+          redirect_to :controller => "posts", :action => "index"
         end
       else
         flash[:notice] = "No posts found for input: "+params[:input].to_s+"! Please try again."

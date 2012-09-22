@@ -28,11 +28,17 @@ class CategoriesController < ApplicationController
     #@posts = Post.where("Category_id LIKE @cat_id.id")#, :cat_id => '%#{ Category.fi (param[:input])}%')
     #@posts = Post.where("content LIKE ?","%"+(params[:input])+"%")
     if @posts.length != 0
-      respond_to do |format|
-        format.html # search.html.erb
-        format.json { render json: @posts_search }
-      end
-
+        if session[:user_id] == nil
+          flash[:notice] = "Posts found are listed below:"
+          respond_to do |format|
+            format.html # search.html.erb
+            format.json { render json: @posts_search }
+          end
+          #redirect_to :controller => :users, :action => :search
+        else
+          flash[:notice] = "Posts found are listed below:"
+          redirect_to :controller => "posts", :action => "index"
+     end
     else
       flash[:alert] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
       redirect_to :controller => "posts", :action => "index"
