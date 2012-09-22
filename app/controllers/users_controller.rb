@@ -12,17 +12,14 @@ class UsersController < ApplicationController
   end
 
   def search
-    @user = User.find_by_username(params[:input])
-    if @user != nil
-      @posts = Post.find_all_by_User_id(@user.id)
+    #@user = User.find_by_username(params[:input])
+    #if @user != nil
+      @posts = Post.where("UPPER(User_id) = (select id from Users where username like '%#{params[:input]}%')")
       if @posts.length != 0
         if session[:user_id] == nil
           #search.html.erb
           flash[:notice] = "Posts found are listed below:"
-          respond_to do |format|
-            format.html
-            format.json { render json: @posts }
-          end
+          #redirect_to :controller => "users", :action => "search"
         else
           flash[:notice] = "Posts found are listed below:"
           redirect_to :controller => "posts", :action => "index"
@@ -31,10 +28,10 @@ class UsersController < ApplicationController
         flash[:notice] = "No posts found for input: "+params[:input].to_s+"! Please try again."
         redirect_to :controller => "posts", :action => "index"
       end
-    else
-      flash[:notice] = "No user found for search input: "+params[:input].to_s
-      redirect_to :controller => "posts", :action => "index"
-    end
+    #else
+     # flash[:notice] = "No user found for search input: "+params[:input].to_s
+      #redirect_to :controller => "posts", :action => "index"
+    #end
 
   end
   # GET /users/1

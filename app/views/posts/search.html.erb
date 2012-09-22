@@ -1,12 +1,11 @@
-<% if session[:user_id] != nil %>
-    <%= link_to 'Post a Question', new_post_path %>
-    &nbsp; &nbsp;
-    <%= link_to 'See all posts', :controller => "posts", :action => "index" %>
+<% if session[:user_id] == nil %>
+    <h2>Not logged in? <%= link_to "Login", :controller => 'logins', :action=>'new' %></h2>
+    <br>
 <%else%>
-    <h2>Not logged in? <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
-<%end%>  <br>
+    <%= link_to 'Post a Question', new_post_path %>
+<% end %>  <br>
 <% if flash[:notice] %>
-    <div  style='font-color:#CC0000;font-weight:bold;'>
+    <div  style='font-color:#CC0000;font-weight:bold; font-size: 14px;'>
       <%= flash[:notice] %>
     </div>
 <% end %>
@@ -20,8 +19,8 @@
   <% @posts.each do |post| %>
       <tr style="background-color: #7fffd4;">
         <td>
-          <p class="title"> <b>Title</b> <%= post.title %>         </p>
-          <p class="content"> <b>Content</b> <%= post.content %>       </p>
+          <p class="title"> <b>Title:</b> <b><%= post.title %>    </b>     </p>
+          <p class="content"> <b>Content:</b> <%= post.content %>       </p>
           <p>
             <span style="background-color: #dc143c; color: #ffffff;">#<%= Category.find(post.Category_id).name %> </span>
           </p>
