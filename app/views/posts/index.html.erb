@@ -73,8 +73,6 @@
           <div style="background-color: #bbffbb;">
             <%= post.content %>
               <br>
-
-            <b>Category:</b><%= Category.find(post.Category_id).name %>
             &nbsp;&nbsp;&nbsp;<b>Author:</b><%= User.find(post.User_id).username %>
           </div>
         <div style="background-color: #7fffd4;">
@@ -107,6 +105,9 @@
             <br>
            <%end%>
           </div>
+        <div style="background-color:  #00bfff;">
+        <span style="background-color: #dc143c; color: #ffffff;">#<%= Category.find(post.Category_id).name %> </span>
+        </div>
     <hr/>
 
 

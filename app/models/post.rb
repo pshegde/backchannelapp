@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   has_many :votes
   has_one :category
   default_scope :order => "updated_at DESC"
-  validates_presence_of :title, :content
+  validates_presence_of :title, :content, :Category_id
 
   def self.destroyLinked(post)
     post.destroy
