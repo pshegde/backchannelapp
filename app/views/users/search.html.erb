@@ -7,35 +7,31 @@
 
 <br>
 
-  <!--<h4>Questions</h4>    -->
-  <table style="width: 100%">
+<!--<h4>Questions</h4>    -->
+<table style="width: 100%">
 
-    <% @posts.each do |post| %>
-        <tr style="background-color: #7fffd4;">
-          <td>
-            <!--<p class="title"> <b>Title</b> <%= post.title %>    </p>
-            <p class="content"> <b>Content</b> <%= post.content %>    </p>
-            <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>   -->
+  <% @posts.each do |post| %>
+      <tr style="background-color: #7fffd4;">
+        <td>
+          <p class="title" > <b> <%= post.title %> </b>   </p>
+          <p class="content"> <%= post.content %>    </p>
+          <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
+          </p>
 
-            <p class="title" > <b> <%= post.title %> </b>   </p>
-            <p class="content"> <%= post.content %>    </p>
-            <p class="category"> <b>Category</b> <%= Category.find(post.Category_id).name %>
-            </p>
+        </td>
+      </tr>
+      <hr/>
+  <% end %>
+</table>
 
-          </td>
-        </tr>
-        <hr/>
-    <% end %>
-  </table>
-
-  <br/>
-    <% if session[:user_id] == nil %>
-        <h2>Not logged in? <%= link_to "Login", :controller => 'logins', :action=>'new' %></h2>
-        <br>
+<br/>
+<% if session[:user_id] == nil %>
+    <h2>Not logged in? <%= link_to "Login", :controller => 'logins', :action=>'new' %></h2>
+    <br>
 
 <% else%>
-  <h3><%= link_to 'Post a Question', new_post_path %>
-    &nbsp; &nbsp;
-    <%= link_to 'See all posts', :controller => "posts", :action => "index" %>    </h3>
+    <h3><%= link_to 'Post a Question', new_post_path %>
+      &nbsp; &nbsp;
+      <%= link_to 'See all posts', :controller => "posts", :action => "index" %>    </h3>
 
 <%end%>
