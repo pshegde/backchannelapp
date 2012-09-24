@@ -80,7 +80,7 @@ class CommentsController < ApplicationController
         #update the updated date from comment table in post table
         @post = Post.find(@comment.Post_id)
         @post.update_attributes(:updated_at => @comment.updated_at)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to posts_url, notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -96,7 +96,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to comments_url }
+      format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
   end

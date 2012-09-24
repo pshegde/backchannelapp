@@ -2,10 +2,10 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   attr_accessible   :username, :first_name, :last_name, :email, :original_password, :salt, :admin, :password
-  has_many :posts
-  has_many :comments
-  has_many :votes
-  has_many :comment_votes
+  has_many :posts, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+  has_many :votes, :dependent => :destroy
+  has_many :comment_votes, :dependent => :destroy
 
   default_scope :order => "updated_at DESC"
   #attr_accessor :original_password
