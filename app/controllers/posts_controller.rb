@@ -2,8 +2,19 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-
-    @posts = Post.all
+    if params[:search] != nil
+      if params[:search].to_s == "user"
+           @posts = Post.find_by_sql("select * from posts where posts.User_id in (select id from users where UPPER(users.username) like UPPER('%#{params[:input]}%'))")
+      elsif params[:search].to_s == "category"
+           @posts = Post.find_by_sql("select * from posts where Category_id in (select id from categories where upper(name) like upper('%#{params[:input]}%'))")
+      elsif params[:search].to_s == "post"
+           @posts = Post.where("UPPER(content) LIKE UPPER('%#{params[:input]}%')")
+      else
+          @posts = Post.all
+      end
+    else
+      @posts = Post.all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -21,11 +32,11 @@ class PostsController < ApplicationController
         end
       else
           flash[:notice] = "Posts found are listed below:"
-          redirect_to :controller => "posts", :action => "index"
+          redirect_to :controller => "posts", :action => "index", :input => params[:input], :search => :post
       end
     else
-      flash[:notice] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
-      redirect_to :controller => "posts", :action => "index"
+      flash[:notice] = 'No posts found for input: '+params[:input].to_s+' ! Please try again.'
+      #redirect_to :controller => "posts", :action => "index"
     end
   end
 

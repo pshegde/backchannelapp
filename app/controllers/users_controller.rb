@@ -14,19 +14,19 @@ class UsersController < ApplicationController
   def search
     #@user = User.find_by_username(params[:input])
     #if @user != nil
-      @posts = Post.where("UPPER(User_id) = (select id from Users where username like '%#{params[:input]}%')")
-      if @posts.length != 0
+      @posts = Post.find_by_sql("select * from posts where posts.User_id in (select id from users where UPPER(users.username) like UPPER('%#{params[:input]}%'))")
+      if @posts.size != 0
         if session[:user_id] == nil
           #search.html.erb
           flash[:notice] = "Posts found are listed below:"
           #redirect_to :controller => "users", :action => "search"
         else
-          flash[:notice] = "Posts found are listed below:"
-          redirect_to :controller => "posts", :action => "index"
+          flash[:alert] = "Posts found are listed below: "
+          redirect_to :controller => "posts", :action => "index", :input => params[:input], :search => :user
         end
       else
         flash[:notice] = "No posts found for input: "+params[:input].to_s+"! Please try again."
-        redirect_to :controller => "posts", :action => "index"
+        #redirect_to :controller => "posts", :action => "index"
       end
     #else
      # flash[:notice] = "No user found for search input: "+params[:input].to_s
@@ -130,6 +130,10 @@ class UsersController < ApplicationController
         @userVotedOnComment << User.find(vote.User_id)
       end
     end
+  end
+
+  def postsSearched
+    @@postsSearched
   end
 
   end

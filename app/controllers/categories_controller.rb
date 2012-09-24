@@ -37,11 +37,11 @@ class CategoriesController < ApplicationController
           #redirect_to :controller => :users, :action => :search
         else
           flash[:notice] = "Posts found are listed below:"
-          redirect_to :controller => "posts", :action => "index"
+          redirect_to :controller => "posts", :action => "index", :input => params[:input], :search => :category
      end
     else
-      flash[:alert] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
-      redirect_to :controller => "posts", :action => "index"
+      flash[:notice] = "No posts found for input: "+params[:input].to_s+" ! Please try again."
+      #redirect_to :controller => "posts", :action => "index"
     end
 
   end
