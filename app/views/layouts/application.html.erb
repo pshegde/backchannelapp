@@ -28,7 +28,11 @@
       <div id="side">
 
            <% if session[:user_id] %>
-                <a href="/posts">Home</a>  <br>
+                <% if session[:isadmin] ==true %>
+                     <a href="/admin_page">Home</a>  <br>
+                <% else %>
+                    <a href="/posts">Home</a>  <br>
+                <%end%>
                 <a href="/logout">Logout</a>
            <% end %>
       </div>

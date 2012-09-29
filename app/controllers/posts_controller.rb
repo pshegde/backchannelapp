@@ -60,6 +60,7 @@ class PostsController < ApplicationController
     flash[:alert] =  session[:user_id].username
     #session[:post_id]=@post.id
     if @user != nil
+        flash[:alert] =  ""
         respond_to do |format|
           format.html # new.html.erb
           format.json { render json: @post }
