@@ -28,25 +28,31 @@ class UserTest < Test::Unit::TestCase
   def  test_uniqueness_of_username
     user = User.new
     user.username = User.find_by_username(:one)
-    #user.username = "efg"
-    user.password = "password"
-
-    #user.id = (users(:pshegde).id + 1)
+    user.first_name="prajakta"
+    user.last_name="amberkar"
+    user.email="pamberk@ncsu.edu"
+    #user.password = "password"
+    user.original_password = "password"
     assert !user.valid?
     user.errors[:username]= ["has already been taken"]
   end
 
-  if false
+  # if false
   def test_authenticate
     user = User.new
     user.username = "testuser"
-    user.password = "testpassword"
+    user.original_password="testpassword"
+    #user.password = "testpassword"
+    user.first_name="abc"
+    user.last_name="xyz"
+    user.email="abc@ncsu.edu"
     user.save
-    assert_not_nil user.authenticate("testuser", "testpassword")
 
-    assert_nil user.authenticate(user.username, "random")
+    assert_not_nil User.authenticate("testuser","testpassword")
+    assert_nil User.authenticate(user.username,"wrongpassword")
+   #assert_nil user.create(user.username, "random")
 
-  end
+  # end
   end
 
 end
