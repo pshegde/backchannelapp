@@ -136,5 +136,5 @@ class UsersController < ApplicationController
     @@postsSearched
   end
 
-  end
+end
 

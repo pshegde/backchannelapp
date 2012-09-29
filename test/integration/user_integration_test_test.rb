@@ -3,12 +3,14 @@ require 'test_helper'
 class UserIntegrationTestTest < ActionDispatch::IntegrationTest
   fixtures :users
   test "the truth" do
-    assert true
+   assert true
   end
+
   def test_login_page
-    get  "/login"
+    get "/login"
     assert_response :success
-    post_via_redirect "/logins", :username => users(:one).username, :password => "password"
+    post "/logins/new"  , :username => users(:one).username, :password => "password"
+    #post_via_redirect "/logins", :username => users(:one).username, :password => "password"
     assert_equal '/posts/index', path
 
   end

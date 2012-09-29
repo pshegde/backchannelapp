@@ -1,6 +1,6 @@
-#require "test/unit"
-#require "test/integration_test_helper"
-class User < ActionDispatch::IntegrationTest
+require "test/unit"
+require "test/integration_test_helper"
+class User < ActionController::IntegrationTest
 
   # Called before every test method runs. Can be used
   # to set up fixture information.
