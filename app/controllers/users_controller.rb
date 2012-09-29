@@ -102,9 +102,26 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    @votesForUser = Vote.where('User_id=' + params[:id].to_s)
+
+    @votesForUser.each do |vote|
+      @allposts =  Post.where('id=' + vote.Post_id.to_s)
+      @allposts.each do |post|
+        post.update_attributes(:num_votes => Integer(post.num_votes) - 1)
+      end
+     end
+
+    @votesForCommentByUser = CommentVote.where('User_id=' + params[:id].to_s)
+
+    @votesForCommentByUser.each do |comment_vote|
+      @allcomments =  Comment.where('id=' + comment_vote.Comment_id.to_s)
+      @allcomments.each do |comm|
+        comm.update_attributes(:num_votes => Integer(comm.num_votes) - 1)
+      end
+    end
+
     @user = User.find(params[:id])
     @user.destroy
-
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
