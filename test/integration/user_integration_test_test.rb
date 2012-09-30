@@ -17,8 +17,9 @@ class UserIntegrationTestTest < ActionDispatch::IntegrationTest
   def test_new_user
     get "/users/new"
     assert_response :success
-    post_via_redirect "/users/new"   ,:username => "suneet" , :first_name =>"suneet" ,:last_name=> "sasidharan", :email =>"ssasidh@ncsu.edu",:original_password =>"suneet"
+    post_via_redirect "/users"   ,:user=>{:username => "suneet" , :first_name =>"suneet" ,:last_name=> "sasidharan", :email =>"ssasidh@ncsu.edu",:original_password =>"suneet" }
     #click_button "Create User"
-    assert_equal '/users/show' ,path
+    @user = User.find_all_by_username("suneet").first
+    assert_equal '/users/'+ @user.id.to_s , path
   end
 end
