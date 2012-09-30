@@ -1,5 +1,10 @@
-<p id="notice"><%= notice %></p>
+<%if session[:user_id]!=nil%>
+    <p id="notice"><%= notice %></p>
 
 
 <%= link_to 'Edit', edit_comment_vote_path(@comment_vote) %> |
 <%= link_to 'Back', comment_votes_path %>
+<%else%>
+
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>

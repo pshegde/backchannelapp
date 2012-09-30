@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       @posts = Post.find_by_sql("select * from posts where posts.User_id in (select id from users where UPPER(users.username) like UPPER('%#{params[:input]}%'))")
       if @posts.size != 0
         if session[:user_id] == nil
-          #search.html.erb
+          #session[:]earch.html.erb
           flash[:notice] = "Posts found are listed below:"
           #redirect_to :controller => "users", :action => "search"
         else

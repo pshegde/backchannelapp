@@ -37,7 +37,7 @@ class UserTest < Test::Unit::TestCase
     user.errors[:username]= ["has already been taken"]
   end
 
-  # if false
+
   def test_authenticate
     user = User.new
     user.username = "testuser"
@@ -50,9 +50,9 @@ class UserTest < Test::Unit::TestCase
 
     assert_not_nil User.authenticate("testuser","testpassword")
     assert_nil User.authenticate(user.username,"wrongpassword")
-   #assert_nil user.create(user.username, "random")
 
-  # end
   end
+
+
 
 end

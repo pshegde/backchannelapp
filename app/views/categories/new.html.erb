@@ -1,5 +1,9 @@
-<h1>New category</h1>
+<%if session[:user_id]!=nil%>
+    <h1>New category</h1>
 
 <%= render 'form' %>
 
+<%else%>
 
+<h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>

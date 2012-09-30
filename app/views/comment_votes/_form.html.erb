@@ -1,4 +1,5 @@
-<%= form_for(@comment_vote) do |f| %>
+<%if session[:user_id]!=nil%>
+    <%= form_for(@comment_vote) do |f| %>
   <% if @comment_vote.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comment_vote.errors.count, "error") %> prohibited this comment_vote from being saved:</h2>
@@ -15,3 +16,7 @@
     <%= f.submit %>
   </div>
 <% end %>
+<%else%>
+
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>

@@ -20,6 +20,7 @@
         <td>
           <p class="title" > <b>Title:</b> <b> <%= post.title %> </b>   </p>
           <p class="content"><b>Content:</b>  <%= post.content %>    </p>
+          <p class="title" > <b>Author:</b>  <%= User.find(post.User_id).username %>   </p>
           <p>
             <span style="background-color: #dc143c; color: #ffffff;">#<%= Category.find(post.Category_id).name %> </span>
           </p>

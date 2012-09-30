@@ -1,4 +1,5 @@
 <% if session[:user_id] != nil %>
+    <h3><%= link_to 'Post a Question', :controller => "posts", :action => "new" %>   </h3>
     <div>
       <% if flash[:alert] %>
           <div  style="font-weight:bold;color: #cc0000;">
@@ -47,6 +48,7 @@
 
           <div style="background-color: #00bfff;font-size:15px;">
             <b><%= post.title %>  </b>
+            <td><%= link_to 'Show', post %></td>
             <% if session[:user_id].id ==post.User_id %>
             &nbsp;&nbsp;&nbsp;<td><%= link_to 'Edit', edit_post_path(post) %></td>
                 <%end%>
@@ -115,7 +117,7 @@
 <br />
 
 
-<%= link_to 'Post a Question', :controller => "posts", :action => "new" %>
+
 
 
 

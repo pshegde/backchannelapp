@@ -1,6 +1,11 @@
-<h1>Editing comment_vote</h1>
+<%if session[:user_id]!=nil%>
+    <h1>Editing comment_vote</h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', @comment_vote %> |
 <%= link_to 'Back', comment_votes_path %>
+<%else%>
+
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>

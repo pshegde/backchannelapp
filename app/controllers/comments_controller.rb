@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
     @user = session[:user_id]
     session[:post_id_passed] = params[:post_id_passed]
 
-    flash[:alert] =  session[:post_id_passed]
+    #flash[:alert] =  session[:post_id_passed]
     if @user != nil
       respond_to do |format|
         format.html # new.html.erb

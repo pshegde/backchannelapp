@@ -3,7 +3,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', comments_path %>
+    <%= link_to 'Back to posts', :controller=>'posts', :action=> 'index'%>
  <%else%>
         <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
  <%end%>

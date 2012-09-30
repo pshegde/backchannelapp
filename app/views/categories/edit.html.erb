@@ -1,6 +1,11 @@
-<h1>Editing category</h1>
+<%if session[:user_id]!=nil%>
+    <h1>Editing category</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @category %> |
+
 <%= link_to 'Back', categories_path %>
+<%else%>
+
+<h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>

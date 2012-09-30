@@ -1,4 +1,5 @@
-<%= form_for(@category) do |f| %>
+<%if session[:user_id]!=nil%>
+    <%= form_for(@category) do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -19,3 +20,7 @@
     <%= f.submit %>
   </div>
 <% end %>
+<%else%>
+
+<h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>
