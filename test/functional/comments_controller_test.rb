@@ -25,7 +25,7 @@ class CommentsControllerTest < ActionController::TestCase
       @request.session[:post_id_passed] = @post.id
       post :create, :comment => { content: "new comment." }
     end
-    assert_equal 'Comment was successfully created.', session[:notice]
+    assert_equal 'Comment was successfully created.', flash[:notice]
     assert_redirected_to comment_path(assigns(:comment))
   end
 
