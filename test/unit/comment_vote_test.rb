@@ -6,8 +6,8 @@ class CommentVotesTest < Test::Unit::TestCase
   #   assert true
   # end
 
-  def test_comment_vote_empty
-    cost = CommentVotes.new
-    assert !cost.valid?
+  def test_comment_vote_create
+    cost = CommentVote.new
+    assert cost.valid?
   end
 end
