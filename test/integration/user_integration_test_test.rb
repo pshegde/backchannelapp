@@ -46,20 +46,15 @@ class UserIntegrationTestTest < ActionDispatch::IntegrationTest
     assert_equal 'Sorry. You cannot vote for your own post.' ,flash[:alert]
 
     get_via_redirect '/commentsforpost/new?post_id_passed='+@post.id.to_s , :comment =>{:content=>"test comment"}
-    assert_equal 'Comment was successfully created.' ,flash[:alert]
+    assert_response :success
 
+    @request.session[:post_id_passed] = @post.id
+    post_via_redirect "/comments", :comment => {:content=>"test comment" }
+
+    assert_equal 'Comment was successfully created.',flash[:notice]
 
     #logout
     get "logout"
     assert_equal 'Successfully Logged out', flash[:alert]
-
-    if false
-    #post_via_redirect "/commentsforpost/new?post_id_passed="+@post.id.to_s , :comment => {:content=>"test comment" }
-    post_via_redirect "/comments", :comment => {:content=>"test comment" }
-    get "comment"
-    @comment = Comment.find_all_by_content("test comment").first
-    assert_equal 'Comment was successfully created.',flash[:notice]
-    #assert_equal '/comment/'+ @comment.id.to_s, path
-       end
   end
 end
