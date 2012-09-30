@@ -1,20 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
+onepost:
   title: MyString
   content: MyString
-  User_id: 1
-  Category_id: 1
+  User_id: <%= ActiveRecord::Fixtures.identify(:one) %>
+  Category_id: <%= ActiveRecord::Fixtures.identify(:onecat) %>
   num_votes: 2
   created_at: <%= Time.now.to_s(:db) %>
   updated_at: <%= Time.now.to_s(:db) %>
 
 
-two:
+twopost:
   title: MyString1
   content: MyString1
-  User_id: 2
-  Category_id: 2
+  User_id: <%= ActiveRecord::Fixtures.identify(:one) %>
+  Category_id: <%= ActiveRecord::Fixtures.identify(:onecat) %>
   num_votes: 2
   created_at: <%= Time.now.to_s(:db) %>
   updated_at: <%= Time.now.to_s(:db) %>

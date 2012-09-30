@@ -20,16 +20,13 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  if false
-
   test "should create user" do
     assert_difference('User.count') do
-      post :create, :@user=>{:first_name=>"abc", :last_name=>"abc", :email=>"abc@ncsu.edu", :username=>"example", :original_password=>"fixpassword1",:password=>"dsfdsg"}
+      post :create, :user=>{:first_name=>"abc", :last_name=>"abc", :email=>"abc@ncsu.edu", :username=>"example", :original_password=>"password"}
     end
-
+    assert_equal 'User was successfully created.', flash[:notice]
     assert_redirected_to user_path(assigns(:user))
   end
-
 
   test "should show user" do
     get :show, :id=> users(:one).to_param
@@ -37,22 +34,19 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @user
+    get :edit, id: users(:one).to_param
     assert_response :success
   end
 
   test "should update user" do
-    put :update, id: @user, user: { password: "abc"}
+    put :update, id: users(:one).to_param, user: { first_name: "abc11"}
     assert_redirected_to user_path(assigns(:user))
   end
 
   test "should destroy user" do
     assert_difference('User.count', -1) do
-      delete :destroy, id: @user
+      delete :destroy, id: users(:one).to_param
     end
-
     assert_redirected_to users_path
-  end
-
   end
 end

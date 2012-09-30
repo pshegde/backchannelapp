@@ -4,17 +4,17 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
-  User_id: 1
-  Post_id: 2
+onevote:
+  User_id: <%= ActiveRecord::Fixtures.identify(:one) %>
+  Post_id: <%= ActiveRecord::Fixtures.identify(:onepost) %>
   created_at: <%= Time.now.to_s(:db) %>
   updated_at: <%= Time.now.to_s(:db) %>
 
 # column: value
 #
-two:
- User_id: 2
- Post_id: 1
+twovote:
+ User_id: <%= ActiveRecord::Fixtures.identify(:one) %>
+ Post_id: <%= ActiveRecord::Fixtures.identify(:onepost) %>
  created_at: <%= Time.now.to_s(:db) %>
  updated_at: <%= Time.now.to_s(:db) %>
 

@@ -1,5 +1,6 @@
 class Vote < ActiveRecord::Base
   # attr_accessible :title, :body
+  attr_accessible :Post_id
   belongs_to :user
   belongs_to :post
 
