@@ -23,32 +23,31 @@ class CommentsControllerTest < ActionController::TestCase
     assert_difference('Comment.count') do
       @request.session[:user_id] = @user
       @request.session[:post_id_passed] = @post.id
-      post :create, :comment => { content: "new comment." }
+      post :create, :comment => { content: "comment test." }
     end
     assert_equal 'Comment was successfully created.', flash[:notice]
     assert_redirected_to comment_path(assigns(:comment))
   end
 
   test "should show comment" do
-    get :show, id: @comment
+    get :show, id: comments(:onecomment).id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @comment
+    get :edit, id: comments(:onecomment).id
     assert_response :success
   end
 
   test "should update comment" do
-    put :update, id: @comment, comment: { content: @comment.content }
-    assert_redirected_to comment_path(assigns(:comment))
+    put :update, id: comments(:onecomment).id, comment: { content: "newcomments ..."}
+    assert_equal 'Comment was successfully updated.', flash[:notice]
   end
 
   test "should destroy comment" do
     assert_difference('Comment.count', -1) do
-      delete :destroy, id: @comment
+      delete :destroy, id: comments(:onecomment).id
     end
-
-    assert_redirected_to comments_path
+    assert_redirected_to posts_path
   end
 end
