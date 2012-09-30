@@ -2,7 +2,9 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionController::TestCase
   setup do
-    @comment = comments(:one)
+    @post = Post.find_all_by_title('MyString').first
+    @comment = Comment.find_all_by_content("MyString").first
+    @user = User.find_all_by_username('pshegde').first
   end
 
   test "should get index" do
@@ -12,15 +14,18 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    @request.session[:user_id] = @user
+    get :new, :post_id_passed => @post.id
     assert_response :success
   end
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post :create, comment: { content: @comment.content }
+      @request.session[:user_id] = @user
+      @request.session[:post_id_passed] = @post.id
+      post :create, :comment => { content: "new comment." }
     end
-
+    assert_equal 'Comment was successfully created.', session[:notice]
     assert_redirected_to comment_path(assigns(:comment))
   end
 
