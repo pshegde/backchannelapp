@@ -7,9 +7,11 @@ class UserIntegrationTestTest < ActionDispatch::IntegrationTest
   end
 
   def test_login_page
-    get "/login"
+    https!
+    get "logins/new"
     assert_response :success
-    post "/logins/new"  , :username => users(:one).username, :password => "password"
+    post_via_redirect "logins/new"  , :username => users(:one).username, :password => "password"
+
     #post_via_redirect "/logins", :username => users(:one).username, :password => "password"
     assert_equal '/posts/index', path
 

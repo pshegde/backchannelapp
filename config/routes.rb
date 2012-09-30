@@ -14,6 +14,8 @@ Backchannel::Application.routes.draw do
   resources :votes
 
   match "/posts/new" => "posts#new"
+  match "/posts/index" => "posts#index"
+  match "/logins/new"   =>"logins#new"
   match "logout" => "logins#logoutUser"
   #match ':users(/:logins)'
   #match '/logins' => 'posts#index'  , :via => :post
