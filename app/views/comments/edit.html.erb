@@ -1,6 +1,12 @@
-<h1>Editing comment</h1>
+<% if session[:user_id]!=nil %>
+    <h1>Editing comment</h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', @comment %> |
 <%= link_to 'Back', :controller=>'posts', :action=> 'index'%>
+
+<%else%>
+
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>

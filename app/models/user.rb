@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   default_scope :order => "updated_at DESC"
   #attr_accessor :original_password
 #  validates_length_of :username, :within => 4..10
-  validates_presence_of  :username ,:first_name, :last_name, :email, :original_password
+  validates_presence_of  :username ,:first_name, :last_name, :email
   validates_uniqueness_of :username
  # attr_protected :id, :salt
 #  attr_accessor :password    #, :username
