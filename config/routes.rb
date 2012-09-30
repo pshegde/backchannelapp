@@ -17,6 +17,8 @@ Backchannel::Application.routes.draw do
   match "/posts/index" => "posts#index"
   match "/logins/new"   =>"logins#new"
   match "logout" => "logins#logoutUser"
+  match "/users/new" => "users#new"
+  match "users/show" => "users#show"
   #match ':users(/:logins)'
   #match '/logins' => 'posts#index'  , :via => :post
   resources :posts
