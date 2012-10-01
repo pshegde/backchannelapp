@@ -31,6 +31,7 @@ class LoginsController < ApplicationController
     #format.json { render json: @login }
     #end
      session[:user_id] = nil
+     session[:isadmin] = false
   end
 
   # GET /logins/1/edit

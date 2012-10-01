@@ -21,8 +21,15 @@
   <b>Email:</b>
   <%= @user.email %>
 </p>
+
+    <p>
+      <b>Administrator:</b>
+      <%= @user.admin %>
+    </p>
 <%if session[:isadmin] ==false %>
      <%= link_to 'Proceed to Posts',:controller=>'posts',:action=>'index'%>
+<%else%>
+        <%= link_to 'Back', users_path %>
  <%end%>
 <%else%>
 
