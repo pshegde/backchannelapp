@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
-    @user = User.find_all_by_username(:one)
+    @user = User.find_all_by_username('pshegde').first
   end
 
   test "the truth" do
@@ -29,18 +29,18 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should show user" do
-    get :show, :id=> users(:one).to_param
+    get :show, :id=> @user.id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: users(:one).to_param
+    get :edit, id: @user.id
     assert_response :success
   end
 
   test "should update user" do
-    put :update, id: users(:one).to_param, user: { first_name: "abc11"}
-    assert_redirected_to user_path(assigns(:user))
+    put :update, id: @user.id, user: { admin: "t"}
+    assert_equal 'User was successfully updated.',flash[:notice]
   end
 
   test "should destroy user" do
