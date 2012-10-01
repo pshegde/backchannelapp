@@ -62,25 +62,46 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
 
-    @user.admin=false
-    respond_to do |format|
-      if @user.save
-        if session[:user_id].nil?
-          session[:user_id] = @user
-          session[:isadmin] = false
-          flash[:alert] = "You have successfully logged in"
-          #redirect_to :controller => "posts", :action => "index"
-        end
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-      else
+    @user = User.new(params[:user])
+    if @user.original_password == '' or  @user.first_name == '' or @user.last_name == '' or @user.username == '' or @user.email == ''
+      if  @user.first_name == ''
+        @user.errors.add :first_name,' not found'
+      end
+      if  @user.last_name == ''
+        @user.errors.add :last_name,' not found'
+      end
+      if  @user.username == ''
+        @user.errors.add :username,' not found'
+      end
+      if  @user.email == ''
+        @user.errors.add :email,' not found'
+      end
+      if  @user.original_password == ''
+        @user.errors.add :original_password,' not found'
+      end
+      respond_to do |format|
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    else
+        @user.admin=false
+        respond_to do |format|
+          if @user.save
+            if session[:user_id].nil?
+              session[:user_id] = @user
+              session[:isadmin] = false
+              flash[:alert] = "You have successfully logged in"
+              #redirect_to :controller => "posts", :action => "index"
+            end
+            format.html { redirect_to @user, notice: 'User was successfully created.' }
+            format.json { render json: @user, status: :created, location: @user }
+          else
+            format.html { render action: "new" }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        end
     end
-    #redirect_to :controller => "posts", :action => "index"
   end
 
   # PUT /users/1

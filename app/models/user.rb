@@ -14,7 +14,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
  # attr_protected :id, :salt
 #  attr_accessor :password    #, :username
+  validates_format_of :first_name, :with => /^[a-zA-Z]+[a-zA-Z'-.]*$/i
+  validates_format_of :last_name, :with => /^[a-zA-Z]+[a-zA-Z'-.]*$/i
+  validates_format_of :username, :with => /^[a-z0-9][a-z0-9'._-]+$/i
   validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
+  #validates_format_of :original_password, :with => /(?=^.{8,}$)(?=.*\\d)(?![.\\n])(?=.*[A-Za-z])(?=.*[_~+=@!#^*$-]).*$/i
 
   def self.authenticate(username, password)
     u=find(:first, :conditions=>["username = ?", username])
