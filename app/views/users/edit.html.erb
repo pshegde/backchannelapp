@@ -1,6 +1,11 @@
+<%if session[:user_id]!=nil%>
 <h1>Editing user</h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>
+<%else%>
+
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>

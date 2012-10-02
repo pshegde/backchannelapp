@@ -1,3 +1,4 @@
+<%if session[:user_id]!=nil%>
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -48,3 +49,7 @@
 
 
 <% end %>
+<%else%>
+
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>
