@@ -1,4 +1,5 @@
-<h1>Listing posts</h1>
+<%if session[:user_id]!=nil%>
+<h1>Reports</h1>
 <table border=1 style="background-color: #7fffd4;">
 
   <%if @users%>
@@ -41,9 +42,8 @@
 </table>
 
 
-<% if flash[:alert] %>
-    <div  style='font-color:#CC0000;font-weight:bold;'>
-      <%= flash[:alert] %>
-    </div>
-<% end %>
 <br>
+<%else%>
+
+    <h2>Please log in <%= link_to "here", :controller => 'logins', :action=>'new' %></h2>
+<%end%>
