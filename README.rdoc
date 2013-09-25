@@ -1,5 +1,5 @@
-Backchannel App
-===================
+== Backchannel Application
+
 Using Ruby on Rails, created a web application which is similar to Live question but provides some extra features. 
 A student after login could comment on any question. He could also "up vote" any post or comment. 
 The "most active" questions were displayed at the top so they could be answered faster. 
